@@ -1,11 +1,11 @@
 require('dotenv').config();
 const express = require('express');
-const atestadoRoutes = require("../src/routes/atestado.routes")
-const CampoTextoRoutes = require("../src/routes/CampoTexto.routes")
-const saidaRoutes = require("../src/routes/saida.routes")
-const usuariosRoutes = require("../src/routes/usuarios.routes")
-const RveRoutes = require("../src/routes/rve.routes")
-const ForumRoutes = require("../src/routes/forum.routes")
+const atestadosRoutes = require("../src/routes/atestadosRoutes")
+const CampoTextoRoutes = require("../src/routes/campoTextoRoutes")
+const saidaRoutes = require("../src/routes/saidaRoutes")
+const usuariosRoutes = require("../src/routes/usuariosRoutes")
+const RveRoutes = require("../src/routes/rveRoutes")
+const ForumRoutes = require("../src/routes/forumRoutes")
 
 
 const app = express();
@@ -13,7 +13,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.use(atestadoRoutes);
+app.use(atestadosRoutes);
 app.use(CampoTextoRoutes);
 app.use(saidaRoutes);
 app.use(usuariosRoutes);
