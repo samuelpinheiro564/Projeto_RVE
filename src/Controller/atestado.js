@@ -1,7 +1,3 @@
-
-
-
-
 const express = require("express");
 const { Pool } = require("pg");
 
@@ -18,7 +14,7 @@ const pool = new Pool({
     port: 4040,
 });
 
-app.post("/atestados", async (req, res) => {
+const createAtestado = async (req, res) => {
     const { NomeAluno, Curso, Turma, ImagemAtestado, RA, CID, DataInicio, DataFim, AssinaturaAnaq, AssinaturaProf1, AssinaturaProf2, AssinaturaProf3, AssinaturaProf4 } = req.body;
     try {
         const result = await pool.query(
@@ -29,18 +25,18 @@ app.post("/atestados", async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
-});
+};
 
-app.get("/atestados", async (req, res) => {
+const getAtestados = async (req, res) => {
     try {
         const result = await pool.query("SELECT * FROM Atestado");
         res.status(200).json(result.rows);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
-});
+};
 
-app.get("/atestados/:id", async (req, res) => {
+const getAtestadoById = async (req, res) => {
     const { id } = req.params;
     try {
         const result = await pool.query("SELECT * FROM Atestado WHERE Id = $1", [id]);
@@ -51,9 +47,9 @@ app.get("/atestados/:id", async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
-});
+};
 
-app.put("/atestados/:id", async (req, res) => {
+const updateAtestado = async (req, res) => {
     const { id } = req.params;
     const { NomeAluno, Curso, Turma, ImagemAtestado, RA, CID, DataInicio, DataFim, AssinaturaAnaq, AssinaturaProf1, AssinaturaProf2, AssinaturaProf3, AssinaturaProf4 } = req.body;
     try {
@@ -68,9 +64,9 @@ app.put("/atestados/:id", async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
-});
+};
 
-app.delete("/atestados/:id", async (req, res) => {
+const deleteAtestado = async (req, res) => {
     const { id } = req.params;
     try {
         const result = await pool.query("DELETE FROM Atestado WHERE Id = $1 RETURNING *", [id]);
@@ -81,7 +77,13 @@ app.delete("/atestados/:id", async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
-});
+};
+
+app.post("/atestados", createAtestado);
+app.get("/atestados", getAtestados);
+app.get("/atestados/:id", getAtestadoById);
+app.put("/atestados/:id", updateAtestado);
+app.delete("/atestados/:id", deleteAtestado);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
