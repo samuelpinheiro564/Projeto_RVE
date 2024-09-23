@@ -1,20 +1,6 @@
-const express = require("express");
-const { Pool } = require("pg");
+const pool = require('../config/dbConfig');
 
-const app = express();
-const PORT = 3000;
-
-app.use(express.json());
-
-const pool = new Pool({
-    user: "postgres",
-    host: "localhost",
-    database: "RVE",
-    password: "ds564",
-    port: 4040,
-});
-
-const createAtestado = async (req, res) => {
+ async function createAtestado (req, res)  {
     const { NomeAluno, Curso, Turma, ImagemAtestado, RA, CID, DataInicio, DataFim, AssinaturaAnaq, AssinaturaProf1, AssinaturaProf2, AssinaturaProf3, AssinaturaProf4 } = req.body;
     try {
         const result = await pool.query(
@@ -27,7 +13,7 @@ const createAtestado = async (req, res) => {
     }
 };
 
-const getAtestados = async (req, res) => {
+ async function getAtestados(req, res) {
     try {
         const result = await pool.query("SELECT * FROM Atestado");
         res.status(200).json(result.rows);
@@ -36,7 +22,7 @@ const getAtestados = async (req, res) => {
     }
 };
 
-const getAtestadoById = async (req, res) => {
+async function getAtestadoById (req, res) {
     const { id } = req.params;
     try {
         const result = await pool.query("SELECT * FROM Atestado WHERE Id = $1", [id]);
@@ -49,7 +35,7 @@ const getAtestadoById = async (req, res) => {
     }
 };
 
-const updateAtestado = async (req, res) => {
+async function updateAtestado  (req, res) {
     const { id } = req.params;
     const { NomeAluno, Curso, Turma, ImagemAtestado, RA, CID, DataInicio, DataFim, AssinaturaAnaq, AssinaturaProf1, AssinaturaProf2, AssinaturaProf3, AssinaturaProf4 } = req.body;
     try {
@@ -66,7 +52,7 @@ const updateAtestado = async (req, res) => {
     }
 };
 
-const deleteAtestado = async (req, res) => {
+ async function deleteAtestado (req, res) {
     const { id } = req.params;
     try {
         const result = await pool.query("DELETE FROM Atestado WHERE Id = $1 RETURNING *", [id]);
@@ -79,12 +65,10 @@ const deleteAtestado = async (req, res) => {
     }
 };
 
-app.post("/atestados", createAtestado);
-app.get("/atestados", getAtestados);
-app.get("/atestados/:id", getAtestadoById);
-app.put("/atestados/:id", updateAtestado);
-app.delete("/atestados/:id", deleteAtestado);
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+module.exports = {
+    createAtestado,
+    getAtestados,
+    getAtestadoById,
+    updateAtestado,
+    deleteAtestado
+};
