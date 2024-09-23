@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const atestadoController = require('../controllers/atestado');
+const atestadoController = require('../Controller/atestado');
 
 router.post("/atestados", atestadoController.createAtestado);
 router.get("/atestados", atestadoController.getAtestados);
