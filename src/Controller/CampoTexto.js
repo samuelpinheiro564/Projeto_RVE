@@ -16,72 +16,58 @@ const pool = new Pool({
 
 
 
-app.post("/CampoTexto", async (req, res) => {
+async function createCampoTexto(req, res) {
     const { NifTextoDocente, Texto, Assinado } = req.body;
-    try {
-        const result = await pool.query(
-            "INSERT INTO CampoTexto (NifTextoDocente, Texto, Assinado) VALUES ($1, $2, $3) RETURNING *",
-            [NifTextoDocente, Texto, Assinado]
-        );
-        res.status(201).json(result.rows[0]);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+    const response = await pool.query(
+        "INSERT INTO CampoTexto (NifTextoDocente, Texto, Assinado) VALUES ($1, $2, $3)",
+        [NifTextoDocente, Texto, Assinado]
+    );
+    res.json({
+        message: "CampoTexto Added successfully",
+        body: {
+            CampoTexto: { NifTextoDocente, Texto, Assinado }
+        },
+    });
 }
-);
 
-
-app.get("/CampoTexto", async (req, res) => {
-    try {
-        const result = await pool.query("SELECT * FROM CampoTexto");
-        res.status(200).json(result.rows);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
-
-app.get("/CampoTexto/:id", async (req, res) => {
-    const { id } = req.params;
-    try {
-        const result = await pool.query("SELECT * FROM CampoTexto WHERE Id = $1", [id]);
-        if (result.rows.length === 0) {
-            return res.status(404).json({ error: "Registro não encontrado" });
-        }
-        res.status(200).json(result.rows[0]);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+async function getCampoTexto(req, res) {
+    const response = await pool.query("SELECT * FROM CampoTexto");
+    res.status(200).json(response.rows);
 }
-);
 
+async function getCampoTextoById(req, res) {
+    const Id = parseInt(req.params.Id);
+    const response = await pool.query("SELECT * FROM CampoTexto WHERE Id = $1", [Id]);
+    res.json(response.rows);
+}
 
-app.put("/CampoTexto/:id", async (req, res) => {
-    const { id } = req.params;
+async function updateCampoTexto(req, res) {
+    const Id = parseInt(req.params.Id);
     const { NifTextoDocente, Texto, Assinado } = req.body;
-    try {
-        const result = await pool.query(
-            "UPDATE CampoTexto SET NifTextoDocente = $1, Texto = $2, Assinado = $3 WHERE Id = $4 RETURNING *",
-            [NifTextoDocente, Texto, Assinado, id]
-        );
-        res.status(200).json(result.rows[0]);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+
+    const response = await pool.query(
+        "UPDATE CampoTexto SET NifTextoDocente = $1, Texto = $2, Assinado = $3 WHERE Id = $4",
+        [NifTextoDocente, Texto, Assinado, Id]
+    );
+    res.json("CampoTexto Updated Successfully");
 }
-);
 
 
-app.delete("/CampoTexto/:id", async (req, res) => {
-    const { id } = req.params;
-    try {
-        await pool.query("DELETE FROM CampoTexto WHERE Id = $1", [id]);
-        res.status(204).end();
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+async function deleteCampoTexto(req, res) {
+    const Id = parseInt(req.params.Id);
+    await pool.query("DELETE FROM CampoTexto where Id = $1", [
+        Id
+    ]);
+    res.json(`CampoTexto ${Id} deleted Successfully`);
 }
-);
+
+
+app.post("/CampoTexto", createCampoTexto);
+app.get("/CampoTexto", getCampoTexto);
+app.get("/CampoTexto/:Id", getCampoTextoById);
+app.put("/CampoTexto/:Id", updateCampoTexto);
+app.delete("/CampoTexto/:Id", deleteCampoTexto);
+
 
 
 app.listen(PORT, () => {
