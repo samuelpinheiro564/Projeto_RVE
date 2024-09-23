@@ -9,7 +9,7 @@ AlunoRA INT,
 MaiorIdade BOOLEAN,
 LiberadoSec BOOLEAN,
 AssinaturaAnaq BOOLEAN,
-AssinaturaProf BOOLEAN,
+AssinaturaProf BOOLEAN
 );
 
 CREATE TABLE Usuario(
@@ -18,7 +18,7 @@ CREATE TABLE Usuario(
     Email VARCHAR(255),
     Senha VARCHAR(255),
     Telefone INT,
-    Tipo VARCHAR(255),
+    Tipo VARCHAR(255)
 );
 
 CREATE TABLE Atestado(
@@ -35,7 +35,7 @@ CREATE TABLE Atestado(
     AssinaturaProf1 BOOLEAN,
     AssinaturaProf2 BOOLEAN,
     AssinaturaProf3 BOOLEAN,
-    AssinaturaProf4 BOOLEAN,
+    AssinaturaProf4 BOOLEAN
 );
 
 CREATE TABLE RVE(
@@ -53,21 +53,20 @@ CREATE TABLE RVE(
  Assinaturas Text,
  Elogios TEXT,
  Dificuldades TEXT,
- Presença TEXT,
+ Presença TEXT
 );
-
-CREATE TABLE Forum(
-    Id INT PRIMARY KEY AUTO_INCREMENT,
-    IdRVE INT,
-    IDCampoTexto INT,
-   FOREGIN KEY (IdRVE) REFERENCES RVE(Id),
-   FOREGIN KEY (IDCampoTexto) REFERENCES CampoTexto(ID),
-);
-
 CREATE TABLE CampoTexto(
     Id INT PRIMARY KEY AUTO_INCREMENT,
     NifTextoDocente INT,
     Texto TEXT,
     Assinado BOOLEAN,
-    FOREGIN KEY (NifTextoDocente) REFERENCES Usuario(Nif),
+    FOREIGN KEY (NifTextoDocente) REFERENCES Usuario(Nif)
 );
+CREATE TABLE Forum(
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    IdRVE INT,
+    IDCampoTexto INT,
+   FOREIGN KEY (IdRVE) REFERENCES RVE(Id),
+   FOREIGN KEY (IDCampoTexto) REFERENCES CampoTexto(ID)
+);
+
