@@ -15,81 +15,59 @@ const pool = new Pool({
 });
 
 
-app.post("/forum", async (req, res) => {
+
+
+async function createForum(req, res) {
     const { IdRVE, IDCampoTexto } = req.body;
-    try {
-        const result = await pool.query(
-            "INSERT INTO Forum (IdRVE, IDCampoTexto) VALUES ($1, $2) RETURNING *",
-            [IdRVE, IDCampoTexto]
-        );
-        res.status(201).json(result.rows[0]);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+    const response = await pool.query(
+        "INSERT INTO Forum (IdRVE, IDCampoTexto) VALUES ($1, $2)",
+        [IdRVE, IDCampoTexto]
+    );
+    res.json({
+        message: "Forum Added successfully",
+        body: {
+            Forum: { IdRVE, IDCampoTexto }
+        },
+    });
 }
-);
 
-app.get("/forum", async (req, res) => {
-    try {
-        const result = await pool.query("SELECT * FROM Forum");
-        res.status(200).json(result.rows);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+async function getForum(req, res) {
+    const response = await pool.query("SELECT * FROM Forum");
+    res.status(200).json(response.rows);
 }
-);
 
-
-app.get("/forum/:id", async (req, res) => {
-    const { id } = req.params;
-    try {
-        const result = await pool.query("SELECT * FROM Forum WHERE Id = $1", [id]);
-        if (result.rows.length === 0) {
-            return res.status(404).json({ error: "Registro não encontrado" });
-        }
-        res.status(200).json(result.rows[0]);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+async function getForumById(req, res) {
+    const Id = parseInt(req.params.Id);
+    const response = await pool.query("SELECT * FROM Forum WHERE Id = $1", [Id]);
+    res.json(response.rows);
 }
-);
 
-
-
-app.put("/forum/:id", async (req, res) => {
-    const { id } = req.params;
+async function updateForum(req, res) {
+    const Id = parseInt(req.params.Id);
     const { IdRVE, IDCampoTexto } = req.body;
-    try {
-        const result = await pool.query(
-            "UPDATE Forum SET IdRVE = $1, IDCampoTexto = $2 WHERE Id = $3 RETURNING *",
-            [IdRVE, IDCampoTexto, id]
-        );
-        if (result.rows.length === 0) {
-            return res.status(404).json({ error: "Registro não encontrado" });
-        }
-        res.status(200).json(result.rows[0]);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+
+    const response = await pool.query(
+        "UPDATE Forum SET IdRVE = $1, IDCampoTexto = $2 WHERE Id = $3",
+        [IdRVE, IDCampoTexto, Id]
+    );
+    res.json("Forum Updated Successfully");
 }
-);
 
 
 
-app.delete("/forum/:id", async (req, res) => {
-    const { id } = req.params;
-    try {
-        const result = await pool.query("DELETE FROM Forum WHERE Id = $1 RETURNING *", [id]);
-        if (result.rows.length === 0) {
-            return res.status(404).json({ error: "Registro não encontrado" });
-        }
-        res.status(200).json(result.rows[0]);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+async function deleteForum(req, res) {
+    const Id = parseInt(req.params.Id);
+    await pool.query("DELETE FROM Forum where Id = $1", [
+        Id
+    ]);
+    res.json(`Forum ${Id} deleted Successfully`);
 }
-);
 
+app.post("/Forum", createForum);
+app.get("/Forum", getForum);
+app.get("/Forum/:Id", getForumById);
+app.put("/Forum/:Id", updateForum);
+app.delete("/Forum/:Id", deleteForum);
 
 
 app.listen(PORT, () => {
