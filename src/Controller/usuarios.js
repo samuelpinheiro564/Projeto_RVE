@@ -1,14 +1,14 @@
 const pool = require('../config/dbConfig');
 
 async function AllUser(req, res)  {
-    const { rows } = await pool.query("SELECT * FROM Usuario");
+    const { rows } = await pool.query("SELECT * FROM Usuarios");
     res.json(rows);
 };
 
 async function CreateUser (req, res)  {
     const { Nome, Email, Senha, Telefone, Tipo } = req.body;
     await pool.query(
-        "INSERT INTO Usuario (Nome, Email, Senha, Telefone, Tipo) VALUES ($1, $2, $3, $4, $5)",
+        "INSERT INTO Usuarios (Nome, Email, Senha, Telefone, Tipo) VALUES ($1, $2, $3, $4, $5)",
         [Nome, Email, Senha, Telefone, Tipo]
     );
     res.json({ message: "Usuario criado" });
