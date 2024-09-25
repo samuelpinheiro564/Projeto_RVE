@@ -1,16 +1,15 @@
 const pool = require('../config/dbConfig');
 
-
 async function createForum(req, res) {
-    const { IdRVE, IDCampoTexto } = req.body;
+    const { idrve, idcampotexto } = req.body;
     const response = await pool.query(
-        "INSERT INTO Forum (IdRVE, IDCampoTexto) VALUES ($1, $2)",
-        [IdRVE, IDCampoTexto]
+        "INSERT INTO Forum (idrve, idcampotexto) VALUES ($1, $2)",
+        [idrve, idcampotexto]
     );
     res.json({
         message: "Forum Added successfully",
         body: {
-            Forum: { IdRVE, IDCampoTexto }
+            Forum: { idrve, idcampotexto }
         },
     });
 }
@@ -21,30 +20,28 @@ async function getForum(req, res) {
 }
 
 async function getForumById(req, res) {
-    const Id = parseInt(req.params.Id);
-    const response = await pool.query("SELECT * FROM Forum WHERE Id = $1", [Id]);
+    const id = parseInt(req.params.id);
+    const response = await pool.query("SELECT * FROM Forum WHERE Id = $1", [id]);
     res.json(response.rows);
 }
 
 async function updateForum(req, res) {
-    const Id = parseInt(req.params.Id);
-    const { IdRVE, IDCampoTexto } = req.body;
+    const id = parseInt(req.params.id);
+    const { idrve, idcampotexto } = req.body;
 
     const response = await pool.query(
         "UPDATE Forum SET IdRVE = $1, IDCampoTexto = $2 WHERE Id = $3",
-        [IdRVE, IDCampoTexto, Id]
+        [idrve, idcampotexto, id]
     );
     res.json("Forum Updated Successfully");
 }
 
-
-
 async function deleteForum(req, res) {
-    const Id = parseInt(req.params.Id);
+    const id = parseInt(req.params.id);
     await pool.query("DELETE FROM Forum where Id = $1", [
-        Id
+        id
     ]);
-    res.json(`Forum ${Id} deleted Successfully`);
+    res.json(`Forum ${id} deleted Successfully`);
 }
 
 module.exports = {
@@ -52,4 +49,5 @@ module.exports = {
     getForum,
     getForumById,
     updateForum,
-    deleteForum};
+    deleteForum
+};
