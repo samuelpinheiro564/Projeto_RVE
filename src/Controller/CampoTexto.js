@@ -1,15 +1,15 @@
 const pool = require('../config/dbConfig');
 
 async function createCampoTexto(req, res) {
-    const { NifTextoDocente, Texto, Assinado } = req.body;
+    const { niftextodocente, texto, assinado } = req.body;
     const response = await pool.query(
-        "INSERT INTO CampoTexto (NifTextoDocente, Texto, Assinado) VALUES ($1, $2, $3)",
-        [NifTextoDocente, Texto, Assinado]
+        "INSERT INTO CampoTexto (niftextodocente, texto, assinado) VALUES ($1, $2, $3)",
+        [niftextodocente, texto, assinado]
     );
     res.json({
         message: "CampoTexto Added successfully",
         body: {
-            CampoTexto: { NifTextoDocente, Texto, Assinado }
+            CampoTexto: { niftextodocente, texto, assinado }
         },
     });
 }
@@ -27,15 +27,14 @@ async function getCampoTextoById(req, res) {
 
 async function updateCampoTexto(req, res) {
     const Id = parseInt(req.params.Id);
-    const { NifTextoDocente, Texto, Assinado } = req.body;
+    const { niftextodocente, texto, assinado } = req.body;
 
     const response = await pool.query(
-        "UPDATE CampoTexto SET NifTextoDocente = $1, Texto = $2, Assinado = $3 WHERE Id = $4",
-        [NifTextoDocente, Texto, Assinado, Id]
+        "UPDATE CampoTexto SET niftextodocente = $1, texto = $2, assinado = $3 WHERE Id = $4",
+        [niftextodocente, texto, assinado, Id]
     );
     res.json("CampoTexto Updated Successfully");
 }
-
 
 async function deleteCampoTexto(req, res) {
     const Id = parseInt(req.params.Id);
@@ -44,7 +43,6 @@ async function deleteCampoTexto(req, res) {
     ]);
     res.json(`CampoTexto ${Id} deleted Successfully`);
 }
-
 
 module.exports = {
     createCampoTexto,
