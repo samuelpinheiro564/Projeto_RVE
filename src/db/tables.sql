@@ -12,7 +12,7 @@ AssinaturaAnaq BOOLEAN,
 AssinaturaProf BOOLEAN
 );
 
-CREATE TABLE Usuario(
+CREATE TABLE Usuarios(
     Nif INT PRIMARY KEY ,
     Nome VARCHAR(255),
     Email VARCHAR(255),
