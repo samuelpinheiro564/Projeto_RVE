@@ -6,10 +6,10 @@ async function AllUser(req, res)  {
 };
 
 async function CreateUser (req, res)  {
-    const { Nome, Email, Senha, Telefone, Tipo } = req.body;
+    const { Nif,Nome, Email, Senha, Telefone, Tipo } = req.body;
     await pool.query(
-        "INSERT INTO Usuarios (Nome, Email, Senha, Telefone, Tipo) VALUES ($1, $2, $3, $4, $5)",
-        [Nome, Email, Senha, Telefone, Tipo]
+        "INSERT INTO Usuarios (Nif,Nome, Email, Senha, Telefone, Tipo) VALUES ($1, $2, $3, $4, $5,$6)",
+        [Nif,Nome, Email, Senha, Telefone, Tipo]
     );
     res.json({ message: "Usuario criado" });
 };
