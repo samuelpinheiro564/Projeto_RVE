@@ -1,20 +1,20 @@
 const pool = require('../config/dbConfig');
 
-app.get("/usuarios", async (req, res) => {
+async function AllUser(req, res)  {
     const { rows } = await pool.query("SELECT * FROM Usuario");
     res.json(rows);
-});
+};
 
-app.post("/usuarios", async (req, res) => {
+async function CreateUser (req, res)  {
     const { Nome, Email, Senha, Telefone, Tipo } = req.body;
     await pool.query(
         "INSERT INTO Usuario (Nome, Email, Senha, Telefone, Tipo) VALUES ($1, $2, $3, $4, $5)",
         [Nome, Email, Senha, Telefone, Tipo]
     );
     res.json({ message: "Usuario criado" });
-});
+};
 
-app.put("/usuarios/:id", async (req, res) => {
+ async function AtualizaUser (req, res)  {
     const { id } = req.params;
     const { Nome, Email, Senha, Telefone, Tipo } = req.body;
     await pool.query(
@@ -22,15 +22,23 @@ app.put("/usuarios/:id", async (req, res) => {
         [Nome, Email, Senha, Telefone, Tipo, id]
     );
     res.json({ message: "Usuario atualizado" });
-});
+};
 
-app.delete("/usuarios/:id", async (req, res) => {
+async function DeleteUSer (req, res)  {
     const { id } = req.params;
     await pool.query("DELETE FROM Usuario WHERE id = $1", [id]);
     res.json({ message: "Usuario deletado" });
+};
+async function GetUserById (req, res)  {
+    const { id } = req.params;
+    const { rows } = await pool.query("SELECT * FROM Usuario WHERE id = $1", [id]);
+    res.json(rows);
 }
-);
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+module.exports = {
+    DeleteUSer,
+    AtualizaUser,
+    CreateUser,
+    AllUser,
+    GetUserById
+}

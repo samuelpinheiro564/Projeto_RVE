@@ -71,12 +71,10 @@ async function deleteRveRecord(req, res) {
     }
 }
 
-app.get("/rve", getRveRecords);
-app.get("/rve/:id", getRveRecordById);
-app.put("/rve/:id", updateRveRecord);
-app.delete("/rve/:id", deleteRveRecord);
-app.post("/rve", createRveRecord);
-
-app.listen(PORT, () => {
-    console.log(`Servidor está rodando na porta ${PORT}`);
-});
+module.exports = {
+    createRveRecord,
+    getRveRecords,
+    getRveRecordById,
+    updateRveRecord,
+    deleteRveRecord
+};

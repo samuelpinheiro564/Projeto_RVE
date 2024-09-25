@@ -46,14 +46,10 @@ async function deleteCampoTexto(req, res) {
 }
 
 
-app.post("/CampoTexto", createCampoTexto);
-app.get("/CampoTexto", getCampoTexto);
-app.get("/CampoTexto/:Id", getCampoTextoById);
-app.put("/CampoTexto/:Id", updateCampoTexto);
-app.delete("/CampoTexto/:Id", deleteCampoTexto);
-
-
-
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+module.exports = {
+    createCampoTexto,
+    getCampoTexto,
+    getCampoTextoById,
+    updateCampoTexto,
+    deleteCampoTexto
+};

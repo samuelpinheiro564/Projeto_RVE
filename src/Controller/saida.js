@@ -60,12 +60,8 @@ async function updateSaidaRecord(req, res) {
     }
 }
 
-app.post("/saida", createSaidaRecord);
-app.get("/saida", getSaidaRecords);
-app.get("/saida/:id", getSaidaRecordById);
-app.put("/saida/:id", updateSaidaRecord);
-
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+module.exports = {
+     createSaidaRecord,
+     getSaidaRecords, 
+     getSaidaRecordById,
+      updateSaidaRecord }; 

@@ -47,13 +47,9 @@ async function deleteForum(req, res) {
     res.json(`Forum ${Id} deleted Successfully`);
 }
 
-app.post("/Forum", createForum);
-app.get("/Forum", getForum);
-app.get("/Forum/:Id", getForumById);
-app.put("/Forum/:Id", updateForum);
-app.delete("/Forum/:Id", deleteForum);
-
-
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+module.exports = {
+    createForum,
+    getForum,
+    getForumById,
+    updateForum,
+    deleteForum};
