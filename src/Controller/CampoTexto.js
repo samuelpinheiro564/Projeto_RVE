@@ -1,20 +1,4 @@
-const express = require("express");
-const { Pool } = require("pg");
-
-const app = express();
-const PORT = 3000;
-
-app.use(express.json());
-
-const pool = new Pool({
-    user: "postgres",
-    host: "localhost",
-    database: "RVE",
-    password: "ds564",
-    port: 4040,
-});
-
-
+const pool = require('../config/dbConfig');
 
 async function createCampoTexto(req, res) {
     const { NifTextoDocente, Texto, Assinado } = req.body;
