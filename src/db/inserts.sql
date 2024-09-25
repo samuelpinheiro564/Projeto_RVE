@@ -15,7 +15,7 @@ INSERT INTO Usuarios (Nif, Nome, Email, Senha, Telefone, Tipo) VALUES
 (345678901, 'Gustavo Ribeiro', 'gustavo@example.com', 'senha202', 456789012, 'Professor');
 
 -- Inserts para a tabela Atestado
-INSERT INTO Atestado (Id, NomeAluno, Curso, Turma, ImagemAtestado, Aluno, CID, DataInicio, DataFim, AssinaturaAnaq, AssinaturaProf1, AssinaturaProf2, AssinaturaProf3, AssinaturaProf4) VALUES 
+INSERT INTO Atestado (Id, NomeAluno, Curso, Turma, ImagemAtestado, AlunoRA, CID, DataInicio, DataFim, AssinaturaAnaq, AssinaturaProf1, AssinaturaProf2, AssinaturaProf3, AssinaturaProf4) VALUES 
 (1, 'Tiago Silva', 'Matemática', 'A', 'imagem1.png', 123456, 'CID001', '2024-09-01', '2024-09-05', TRUE, FALSE, TRUE, FALSE, TRUE),
 (2, 'Juliana Costa', 'História', 'B', 'imagem2.png', 654321, 'CID002', '2024-09-02', '2024-09-06', TRUE, TRUE, TRUE, FALSE, FALSE),
 (3, 'Marcos Santos', 'Química', 'C', 'imagem3.png', 112233, 'CID003', '2024-09-03', '2024-09-07', FALSE, TRUE, FALSE, TRUE, TRUE),
