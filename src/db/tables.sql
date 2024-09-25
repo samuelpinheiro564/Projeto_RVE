@@ -64,8 +64,9 @@ CREATE TABLE CampoTexto(
 );
 CREATE TABLE Forum(
     Id INT PRIMARY KEY ,
-    IdRVE INT,
+    IDRVE INT,
     IDCampoTexto INT,
+    Hora Time,
    FOREIGN KEY (IdRVE) REFERENCES RVE(Id),
    FOREIGN KEY (IDCampoTexto) REFERENCES CampoTexto(ID)
 );
