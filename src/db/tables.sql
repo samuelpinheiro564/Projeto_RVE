@@ -27,7 +27,7 @@ CREATE TABLE Atestado(
     Curso VARCHAR(255),
     Turma VARCHAR(255),
     ImagemAtestado TEXT,
-    Aluno RA INT,
+    AlunoRA INT,
     CID VARCHAR(255),
     DataInicio DATE,
     DataFim DATE,
@@ -60,7 +60,7 @@ CREATE TABLE CampoTexto(
     NifTextoDocente INT,
     Texto TEXT,
     Assinado BOOLEAN,
-    FOREIGN KEY (NifTextoDocente) REFERENCES Usuario(Nif)
+    FOREIGN KEY (NifTextoDocente) REFERENCES Usuarios(Nif)
 );
 CREATE TABLE Forum(
     Id INT PRIMARY KEY ,
