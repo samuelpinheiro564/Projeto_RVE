@@ -38,7 +38,7 @@ CREATE TABLE Atestado(
     AssinaturaProf4 BOOLEAN
 );
 
-CREATE TABLE RVE(
+CREATE TABLE RVES(
  Id INT PRIMARY KEY ,
  Autor VARCHAR(255),
  Estudante VARCHAR(255),
@@ -67,7 +67,7 @@ CREATE TABLE Forum(
     IDRVE INT,
     IDCampoTexto INT,
     Hora Time,
-   FOREIGN KEY (IdRVE) REFERENCES RVE(Id),
+   FOREIGN KEY (IdRVE) REFERENCES RVES(Id),
    FOREIGN KEY (IDCampoTexto) REFERENCES CampoTexto(ID)
 );
 

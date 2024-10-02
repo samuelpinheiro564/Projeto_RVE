@@ -8,11 +8,11 @@ INSERT INTO Saida (id, NomeALuno, Curso, DataSaida, HoraSaida, Turma, AlunoRA, M
 
 -- Inserts para a tabela Usuario
 INSERT INTO Usuarios (Nif, Nome, Email, Senha, Telefone, Tipo) VALUES 
-(123456789, 'Carlos Almeida', 'carlos@example.com', 'senha123', 987654321, 'Professor'),
+(123456789, 'Carlos Almeida', 'carlos@example.com', 'senha123', 987654321, 'Docente'),
 (987654321, 'Fernanda Lima', 'fernanda@example.com', 'senha456', 123456789, 'Aluno'),
-(567890123, 'Rafael Gomes', 'rafael@example.com', 'senha789', 234567890, 'Professor'),
+(567890123, 'Rafael Gomes', 'rafael@example.com', 'senha789', 234567890, 'Docente'),
 (234567890, 'Sofia Martins', 'sofia@example.com', 'senha101', 345678901, 'Aluno'),
-(345678901, 'Gustavo Ribeiro', 'gustavo@example.com', 'senha202', 456789012, 'Professor');
+(345678901, 'Gustavo Ribeiro', 'gustavo@example.com', 'senha202', 456789012, 'Docente');
 
 -- Inserts para a tabela Atestado
 INSERT INTO Atestado (Id, NomeAluno, Curso, Turma, ImagemAtestado, AlunoRA, CID, DataInicio, DataFim, AssinaturaAnaq, AssinaturaProf1, AssinaturaProf2, AssinaturaProf3, AssinaturaProf4) VALUES 
@@ -23,7 +23,7 @@ INSERT INTO Atestado (Id, NomeAluno, Curso, Turma, ImagemAtestado, AlunoRA, CID,
 (5, 'Eduardo Pereira', 'Biologia', 'E', 'imagem5.png', 778899, 'CID005', '2024-09-05', '2024-09-09', FALSE, TRUE, TRUE, FALSE, TRUE);
 
 -- Inserts para a tabela RVE
-INSERT INTO RVE (Id, Autor, Estudante, Curso, Turma, Data, Hora, Motivo, OrientaçõesEstudante, DescricaoOcorrido, DocentesEnvolvidos, Assinaturas, Elogios, Dificuldades, Presença) VALUES 
+INSERT INTO RVES (Id, Autor, Estudante, Curso, Turma, Data, Hora, Motivo, OrientaçõesEstudante, DescricaoOcorrido, DocentesEnvolvidos, Assinaturas, Elogios, Dificuldades, Presença) VALUES 
 (1, 'Prof. Ana', 'Tiago Silva', 'Matemática', 'A', '2024-09-01', '08:30:00', 'Faltou à aula', 'Estudar mais', 'Faltou por motivo de saúde', 'Prof. Ana', 'Assinado', 'Bom aluno', 'Dificuldade em entender', 'Presente'),
 (2, 'Prof. Carlos', 'Juliana Costa', 'História', 'B', '2024-09-02', '09:00:00', 'Comportamento', 'Melhorar postura', 'Comportamento inadequado', 'Prof. Carlos', 'Assinado', 'Participativa', 'Nenhuma', 'Presente'),
 (3, 'Prof. Rafael', 'Marcos Santos', 'Química', 'C', '2024-09-03', '10:15:00', 'Nota abaixo da média', 'Revisar conteúdo', 'Desempenho insatisfatório', 'Prof. Rafael', 'Assinado', 'Dedicado', 'Dificuldade em química', 'Presente'),
