@@ -5,12 +5,13 @@ const atestadosRoutes = require("../src/routes/atestadosRoutes")
 const CampoTextoRoutes = require("../src/routes/campoTextoRoutes")
 const ForumRoutes = require("../src/routes/forumRoutes")
 const SaidaRoutes = require("../src/routes/saidaRoutes")
-const UsuariosRoutes = require("../src/routes/usuariosRoutes")
+const usuarios = require("../src/routes/usuarios.routes")
 const RveRoutes = require("../src/routes/rveRoutes")
-
-
-
+const cors = require('cors');  
+ 
 const app = express();
+
+app.use(cors());
 const port = process.env.PORT || 3000; 
 
 app.use(express.json());
@@ -19,7 +20,7 @@ app.use(atestadosRoutes);
 app.use(CampoTextoRoutes);
 app.use(ForumRoutes);
 app.use(SaidaRoutes);
-app.use(UsuariosRoutes);
+app.use(usuarios);
 app.use(RveRoutes);
 
 

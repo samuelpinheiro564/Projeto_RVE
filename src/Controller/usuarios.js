@@ -30,9 +30,15 @@ async function DeleteUSer (req, res)  {
     res.json({ message: "Usuario deletado" });
 };
 async function Login (req, res)  {
-    const { Nif } = req.params;
-    const { rows } = await pool.query("SELECT * FROM Usuarios WHERE Nif = $1", [Nif]);
-    res.json(rows);
+    try {
+        const { Nif } = req.params;
+        const { rows } = await pool.query("SELECT * FROM Usuarios WHERE Nif = $1", [Nif]);
+        res.json(rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+  
 }
 
 module.exports = {
