@@ -35,7 +35,7 @@ CREATE TABLE atestados (
 );
 
 CREATE TABLE RVES(
- Id INT PRIMARY KEY ,
+ Id SERIAL PRIMARY KEY ,
  Autor VARCHAR(255),
  Estudante VARCHAR(255),
  Curso VARCHAR(255),
@@ -43,13 +43,13 @@ CREATE TABLE RVES(
  Data DATE,
  Hora TIME,
  Motivo VARCHAR(255),
- OrientaçõesEstudante TEXT,
+ OrientacoesEstudante TEXT,
  DescricaoOcorrido TEXT,
  DocentesEnvolvidos TEXT,
  Assinaturas Text,
  Elogios TEXT,
  Dificuldades TEXT,
- Presença TEXT
+ Presenca TEXT
 );
 CREATE TABLE CampoTexto(
     Id INT PRIMARY KEY ,

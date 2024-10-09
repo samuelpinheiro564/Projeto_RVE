@@ -33,12 +33,12 @@ INSERT INTO atestados (
     'caminho/para/imagem.jpg',   
     'A12'  
 );
-INSERT INTO RVES (Id, Autor, Estudante, Curso, Turma, Data, Hora, Motivo, OrientaçõesEstudante, DescricaoOcorrido, DocentesEnvolvidos, Assinaturas, Elogios, Dificuldades, Presença) VALUES 
-(1, 'Prof. Ana', 'Tiago Silva', 'Matemática', 'A', '2024-09-01', '08:30:00', 'Faltou à aula', 'Estudar mais', 'Faltou por motivo de saúde', 'Prof. Ana', 'Assinado', 'Bom aluno', 'Dificuldade em entender', 'Presente'),
-(2, 'Prof. Carlos', 'Juliana Costa', 'História', 'B', '2024-09-02', '09:00:00', 'Comportamento', 'Melhorar postura', 'Comportamento inadequado', 'Prof. Carlos', 'Assinado', 'Participativa', 'Nenhuma', 'Presente'),
-(3, 'Prof. Rafael', 'Marcos Santos', 'Química', 'C', '2024-09-03', '10:15:00', 'Nota abaixo da média', 'Revisar conteúdo', 'Desempenho insatisfatório', 'Prof. Rafael', 'Assinado', 'Dedicado', 'Dificuldade em química', 'Presente'),
-(4, 'Prof. Beatriz', 'Beatriz Lima', 'Física', 'D', '2024-09-04', '11:00:00', 'Faltou ao teste', 'Estudar para o próximo', 'Faltou ao teste sem justificativa', 'Prof. Beatriz', 'Assinado', 'Inteligente', 'Falta de interesse', 'Presente'),
-(5, 'Prof. Gustavo', 'Eduardo Pereira', 'Biologia', 'E', '2024-09-05', '12:30:00', 'Problemas de saúde', 'Consultar médico', 'Problemas recorrentes', 'Prof. Gustavo', 'Assinado', 'Responsável', 'Dificuldade em biologia', 'Presente');
+INSERT INTO RVES ( Autor, Estudante, Curso, Turma, Data, Hora, Motivo, OrientacoesEstudante, DescricaoOcorrido, DocentesEnvolvidos, Assinaturas, Elogios, Dificuldades,Presenca) VALUES 
+('Prof. Ana', 'Tiago Silva', 'Matemática', 'A', '2024-09-01', '08:30:00', 'Faltou à aula', 'Estudar mais', 'Faltou por motivo de saúde', 'Prof. Ana', 'Assinado', 'Bom aluno', 'Dificuldade em entender', 'Presente'),
+('Prof. Carlos', 'Juliana Costa', 'História', 'B', '2024-09-02', '09:00:00', 'Comportamento', 'Melhorar postura', 'Comportamento inadequado', 'Prof. Carlos', 'Assinado', 'Participativa', 'Nenhuma', 'Presente'),
+('Prof. Rafael', 'Marcos Santos', 'Química', 'C', '2024-09-03', '10:15:00', 'Nota abaixo da média', 'Revisar conteúdo', 'Desempenho insatisfatório', 'Prof. Rafael', 'Assinado', 'Dedicado', 'Dificuldade em química', 'Presente'),
+('Prof. Beatriz', 'Beatriz Lima', 'Física', 'D', '2024-09-04', '11:00:00', 'Faltou ao teste', 'Estudar para o próximo', 'Faltou ao teste sem justificativa', 'Prof. Beatriz', 'Assinado', 'Inteligente', 'Falta de interesse', 'Presente'),
+('Prof. Gustavo', 'Eduardo Pereira', 'Biologia', 'E', '2024-09-05', '12:30:00', 'Problemas de saúde', 'Consultar médico', 'Problemas recorrentes', 'Prof. Gustavo', 'Assinado', 'Responsável', 'Dificuldade em biologia', 'Presente');
 
 INSERT INTO CampoTexto (Id, NifTextoDocente, Texto, Assinado) VALUES 
 (1, 123456789, 'Texto de exemplo 1', TRUE),
