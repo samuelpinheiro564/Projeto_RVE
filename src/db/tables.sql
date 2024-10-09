@@ -21,21 +21,17 @@ CREATE TABLE Usuarios(
     Tipo VARCHAR(255)
 );
 
-CREATE TABLE Atestado(
-    Id INT  PRIMARY KEY ,
-    NomeAluno VARCHAR(255),
-    Curso VARCHAR(255),
-    Turma VARCHAR(255),
-    ImagemAtestado TEXT,
-    AlunoRA INT,
-    CID VARCHAR(255),
-    DataInicio DATE,
-    DataFim DATE,
-    AssinaturaAnaq BOOLEAN,
-    AssinaturaProf1 BOOLEAN,
-    AssinaturaProf2 BOOLEAN,
-    AssinaturaProf3 BOOLEAN,
-    AssinaturaProf4 BOOLEAN
+CREATE TABLE atestados (  
+    id SERIAL PRIMARY KEY,  
+    aluno TEXT NOT NULL,  
+    turma TEXT NOT NULL,  
+    curso TEXT NOT NULL,  
+    ra TEXT NOT NULL,  
+    data_inicial DATE NOT NULL,  
+    data_final DATE NOT NULL,  
+    justificativa TEXT NOT NULL,  
+    imagem TEXT,   
+    cid TEXT NOT NULL  
 );
 
 CREATE TABLE RVES(
