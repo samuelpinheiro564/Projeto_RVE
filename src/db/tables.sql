@@ -43,13 +43,13 @@ CREATE TABLE RVES(
  Data DATE,
  Hora TIME,
  Motivo VARCHAR(255),
- OrientaçõesEstudante TEXT,
+ OrientacoesEstudante TEXT,
  DescricaoOcorrido TEXT,
  DocentesEnvolvidos TEXT,
  Assinaturas Text,
  Elogios TEXT,
  Dificuldades TEXT,
- Presença TEXT
+ Presenca TEXT
 );
 CREATE TABLE CampoTexto(
     Id INT PRIMARY KEY ,
