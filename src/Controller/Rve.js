@@ -2,12 +2,12 @@ const pool = require('../config/dbConfig');
 
 
 async function createRveRecord(req, res) {
-    const {autor,estudante,curso,turma,data,hora,motivo,orientacoesestudante,descricaoOcorrido,docentesEnvolvidos,assinaturas,elogios,dificuldades,presenca} = req.body;
+    const {autor,estudante,curso,turma,data,hora,motivo,orientacoesEstudante ,descricaoOcorrido,docentesEnvolvidos,assinaturas,elogios,dificuldades,presenca} = req.body;
     try {
         const result = await pool.query(
             `INSERT INTO rves (autor,estudante,curso,turma,data,hora,motivo,orientacoesestudante,descricaoOcorrido,docentesEnvolvidos,assinaturas,elogios,dificuldades,presenca)
              VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *`,
-            [autor,estudante,curso,turma,data,hora,motivo,orientacoesestudante,descricaoOcorrido,docentesEnvolvidos,assinaturas,elogios,dificuldades,presenca]
+            [autor,estudante,curso,turma,data,hora,motivo,orientacoesEstudante,descricaoOcorrido,docentesEnvolvidos,assinaturas,elogios,dificuldades,presenca]
         );
         res.status(201).json(result.rows[0]);
     } catch (error) {
