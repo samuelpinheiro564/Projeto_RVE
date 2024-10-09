@@ -5,18 +5,18 @@ async function createAtestado(req, res) {
         aluno,  
         curso,  
         turma,  
-        imagem,  
-        ra,  
-        justificativa,
-        cid,  
-        data_inicial,  
-        data_final  
+        ra,
+        data_inicial,
+            data_final,
+            justificativa,
+            imagem,
+            cid
     } = req.body;  
 
     try {  
         const result = await pool.query(  
-            "INSERT INTO atestados (aluno,curso,turma,imagem,ra,justificativa,cid,data_inicial,data_final) VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9) RETURNING *",  
-            [aluno, curso, turma, imagem, ra, justificativa, cid, data_inicial, data_final]  
+            "INSERT INTO atestados (aluno,curso,turma,ra,data_inicial,data_final,justificativa,imagem,cid) VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9) RETURNING *",  
+            [aluno,curso,turma,ra,data_inicial,data_final,justificativa,imagem,cid]  
         );  
         res.status(201).json(result.rows[0]);  
     } catch (err) {  
