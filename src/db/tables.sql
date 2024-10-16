@@ -1,16 +1,15 @@
-CREATE TABLE Saida(
-id INT PRIMARY KEY ,
-NomeALuno VARCHAR(255),
-Curso VARCHAR(255),
-DataSaida DATE,
-HoraSaida TIME,
-Turma VARCHAR(255),
-AlunoRA INT,
-MaiorIdade BOOLEAN,
-LiberadoSec BOOLEAN,
-AssinaturaAnaq BOOLEAN,
-AssinaturaProf BOOLEAN
-);
+CREATE TABLE Saida (  
+    id SERIAL PRIMARY KEY,  
+    nomealuno VARCHAR(255),  
+    curso VARCHAR(255),  
+    datasaida DATE,  
+    horasaida TIME,  
+    turma VARCHAR(255),  
+    alunora VARCHAR(255),  
+    maioridade BOOLEAN,  
+    assinaturaanaq VARCHAR(255),  
+    assinaturaprof VARCHAR(255)  
+);  
 
 CREATE TABLE Usuarios(
     Nif INT PRIMARY KEY ,
