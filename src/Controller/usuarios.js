@@ -12,9 +12,9 @@ catch (error) {
 };
 
 async function CreateUser (req, res)  {
-    const { nif,nome,email,senha,telefone,tipo } = req.body;
+    const {nif,nome,email,senha,telefone,tipo} = req.body;
     await pool.query(
-        "INSERT INTO Usuarios (nif,nome,email,senha,telefone,tipo) VALUES ($1, $2, $3, $4, $5,$6)",
+        "INSERT INTO Usuarios (nif,nome,email,senha,telefone,tipo) VALUES ($1,$2,$3,$4,$5,$6)",
         [nif,nome,email,senha,telefone,tipo]
     );
     res.json({ message: "Usuario criado" });

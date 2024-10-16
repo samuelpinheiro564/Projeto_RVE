@@ -17,8 +17,8 @@ CREATE TABLE Usuarios(
     Nome VARCHAR(255),
     Email VARCHAR(255),
     Senha VARCHAR(255),
-    Telefone INT,
-    Tipo VARCHAR(255)
+    Telefone VARCHAR(19),
+    Tipo VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE atestados (  
@@ -29,9 +29,9 @@ CREATE TABLE atestados (
     ra TEXT NOT NULL,  
     data_inicial DATE NOT NULL,  
     data_final DATE NOT NULL,  
-    justificativa TEXT NOT NULL,  
-    imagem TEXT,   
-    cid TEXT NOT NULL  
+    justificativa TEXT NOT NULL, 
+      cid TEXT NOT NULL , 
+    imagem BYTEA     
 );
 
 CREATE TABLE RVES(
@@ -45,8 +45,8 @@ CREATE TABLE RVES(
  Motivo VARCHAR(255),
  OrientacoesEstudante TEXT,
  DescricaoOcorrido TEXT,
- DocentesEnvolvidos TEXT,
- Assinaturas Text,
+ DocentesEnvolvidos TEXT[],
+ Assinaturas Text[],
  Elogios TEXT,
  Dificuldades TEXT,
  Presenca TEXT
@@ -61,9 +61,8 @@ CREATE TABLE CampoTexto(
 CREATE TABLE Forum(
     Id INT PRIMARY KEY ,
     IDRVE INT,
-    IDCampoTexto INT,
-    Hora Time,
-   FOREIGN KEY (IdRVE) REFERENCES RVES(Id),
-   FOREIGN KEY (IDCampoTexto) REFERENCES CampoTexto(ID)
+    IDCampoTexto INT REFERENCES FROM  CampoTexto(Id) CASCADE,
+    Data DATE,
+   FOREIGN KEY (IdRVE) REFERENCES RVES(Id)
 );
 
