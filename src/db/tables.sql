@@ -6,9 +6,10 @@ CREATE TABLE Saida (
     horasaida TIME,  
     turma VARCHAR(255),  
     alunora VARCHAR(255),  
-    maioridade BOOLEAN,  
-    assinaturaanaq VARCHAR(255),  
-    assinaturaprof VARCHAR(255)  
+    maioridade BOOLEAN, 
+    justificativa VARCHAR(255), 
+    assinaturaAnaq VARCHAR(255),  
+    assinaturaProf VARCHAR(255)  
 );  
 
 CREATE TABLE Usuarios(

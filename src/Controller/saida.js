@@ -9,8 +9,9 @@ async function createSaidaRecord(req, res) {
         turma,  
         alunora,  
         maioridade,  
-        assinaturaanaq,  
-        assinaturaprof  
+        justificativa,
+        assinaturaAnaq,  
+        assinaturaProf  
     } = req.body;  
 
     // Verifica se a data foi fornecida  
@@ -30,8 +31,9 @@ async function createSaidaRecord(req, res) {
     
     try {  
         const result = await pool.query(  
-            `INSERT INTO Saida (nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, assinaturaanaq, assinaturaprof) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,  
-            [nomealuno, curso, datasaida, horasaida, turma, alunora, isMaioridade, assinaturaanaq, assinaturaprof]  
+            `INSERT INTO Saida (nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, justificativa, assinaturaAnaq, assinaturaProf) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9,  $10) RETURNING *`,  
+
+            [nomealuno, curso, datasaida, horasaida, turma, alunora, isMaioridade,justificativa, assinaturaAnaq, assinaturaProf]  
         );  
         res.status(201).json(result.rows[0]);  
     } catch (error) {  
@@ -71,8 +73,9 @@ async function updateSaidaRecord(req, res) {
         turma,  
         alunora,  
         maioridade,  
-        assinaturaanaq,  
-        assinaturaprof  
+        justificativa,
+        assinaturaAnaq,  
+        assinaturaProf  
     } = req.body;  
 
     // Validação de dados atualizados, especialmente a data  
@@ -87,8 +90,8 @@ async function updateSaidaRecord(req, res) {
 
     try {  
         await pool.query(  
-            "UPDATE Saida SET nomealuno = $1, curso = $2, datasaida = $3, horasaida = $4, turma = $5, alunora = $6, maioridade = $7, assinaturaanaq = $8, assinaturaprof = $9 WHERE id = $10",  
-            [nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, assinaturaanaq, assinaturaprof, id]  
+            "UPDATE Saida SET nomealuno = $1, curso = $2, datasaida = $3, horasaida = $4, turma = $5, alunora = $6, maioridade = $7,justificativa = $8,assinaturaAnaq = $9, assinaturaProf = $10 WHERE id = $11",  
+            [nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade,justificativa, assinaturaanaq, assinaturaprof, id]  
         );  
         res.json({ message: "Saida atualizada" });  
     } catch (error) {  
