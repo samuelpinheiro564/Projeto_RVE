@@ -1,19 +1,7 @@
 const pool = require('../config/dbConfig');  
 
-async function createSaidaRecord(req, res) {  
-    const {  
-        nomealuno,  
-        curso,  
-        datasaida,  
-        horasaida,  
-        turma,  
-        alunora,  
-        maioridade,  
-        justificativa,
-        assinaturaAnaq,  
-        assinaturaProf  
-    } = req.body;  
 
+<<<<<<< HEAD
     if (!datasaida) {  
         return res.status(400).json({ error: "Data de saída não pode estar vazia." });  
     }  
@@ -39,6 +27,23 @@ async function createSaidaRecord(req, res) {
         res.status(500).json({ error: "Internal Server Error" });  
     }  
 }  
+=======
+async function createSaidaRecord(req, res) {
+    const { id,nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, liberadosec, assinaturaanaq, assinaturaprof } = req.body;
+    try {
+        const result = await pool.query(
+            `INSERT INTO Saida (id,nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, liberadosec, assinaturaanaq, assinaturaprof)  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10,$11) RETURNING *`,
+            [id,nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, liberadosec, assinaturaanaq, assinaturaprof]
+        );
+        res.status(201).json(result.rows[0]);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+
+}
+>>>>>>> ce4fb0034ee6dcaa23b98558c41b2ef928d95029
 
 async function getSaidaRecords(req, res) {  
     try {  
