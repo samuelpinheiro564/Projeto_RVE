@@ -13,6 +13,19 @@ AssinaturaAnaq VARCHAR(255),
 AssinaturaProf VARCHAR(255)
 );
 
+CREATE TABLE SaidaProfessor(
+id SERIAL PRIMARY KEY ,
+NomeProfessor VARCHAR(255),
+Curso VARCHAR(255),
+DataSaida DATE,
+HoraSaida TIME,
+Turma VARCHAR(255),
+ProfessorRA INT,
+MaiorIdade BOOLEAN,
+justificativa VARCHAR(255),
+AssinaturaAnaq VARCHAR(255),
+AssinaturaProf VARCHAR(255)
+);
 
 CREATE TABLE Usuarios(
     Nif INT PRIMARY KEY ,
