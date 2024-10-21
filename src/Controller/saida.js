@@ -7,7 +7,7 @@ async function createSaidaRecord(req, res) {
         datasaida,  
         horasaida,  
         turma,  
-        alunoRA,  
+        alunora,  
         maioridade,  
         justificativa,
         assinaturaAnaq,  
@@ -29,9 +29,9 @@ async function createSaidaRecord(req, res) {
     
     try {  
         const result = await pool.query(  
-            `INSERT INTO Saida (nomealuno, curso, datasaida, horasaida, turma, alunoRA , maioridade, justificativa, assinaturaAnaq, assinaturaProf) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9,  $10) RETURNING *`,  
+            `INSERT INTO Saida (nomealuno, curso, datasaida, horasaida, turma, alunora , maioridade, justificativa, assinaturaAnaq, assinaturaProf) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9,  $10) RETURNING *`,  
 
-            [nomealuno, curso, datasaida, horasaida, turma, alunoRA, maioridade,justificativa, assinaturaAnaq, assinaturaProf]  
+            [nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade,justificativa, assinaturaAnaq, assinaturaProf]  
         );  
         res.status(201).json(result.rows[0]);  
     } catch (error) {  
@@ -41,11 +41,11 @@ async function createSaidaRecord(req, res) {
 }  
 
 async function createSaidaRecord(req, res) {
-    const { nomealuno, curso, datasaida, horasaida, turma, alunoRA , maioridade, justificativa, assinaturaAnaq, assinaturaProf } = req.body;
+    const { nomealuno, curso, datasaida, horasaida, turma, alunora , maioridade, justificativa, assinaturaAnaq, assinaturaProf } = req.body;
     try {
         const result = await pool.query(
-          `INSERT INTO Saida (nomealuno, curso, datasaida, horasaida, turma, alunoRA, maioridade, justificativa, assinaturaAnaq, assinaturaProf) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,  
-[nomealuno, curso, datasaida, horasaida, turma, alunoRA, maioridade, justificativa, assinaturaAnaq, assinaturaProf]  
+          `INSERT INTO Saida (nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, justificativa, assinaturaAnaq, assinaturaProf) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,  
+[nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, justificativa, assinaturaAnaq, assinaturaProf]  
         );
         res.status(201).json(result.rows[0]);
     }
@@ -86,7 +86,7 @@ async function updateSaidaRecord(req, res) {
         datasaida,  
         horasaida,  
         turma,  
-        alunoRA,  
+        alunora,  
         maioridade,  
         justificativa,
         assinaturaAnaq,  
@@ -104,8 +104,8 @@ async function updateSaidaRecord(req, res) {
 
     try {  
         await pool.query(  
-            "UPDATE Saida SET nomealuno = $1, curso = $2, datasaida = $3, horasaida = $4, turma = $5, alunoRA = $6, maioridade = $7,justificativa = $8,assinaturaAnaq = $9, assinaturaProf = $10 WHERE id = $11",  
-            [nomealuno, curso, datasaida, horasaida, turma, alunoRA, maioridade,justificativa, assinaturaAnaq, assinaturaProf, id]  
+            "UPDATE Saida SET nomealuno = $1, curso = $2, datasaida = $3, horasaida = $4, turma = $5, alunora = $6, maioridade = $7,justificativa = $8,assinaturaAnaq = $9, assinaturaProf = $10 WHERE id = $11",  
+            [nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade,justificativa, assinaturaAnaq, assinaturaProf, id]  
         );  
         res.json({ message: "Saida atualizada" });  
     } catch (error) {  
