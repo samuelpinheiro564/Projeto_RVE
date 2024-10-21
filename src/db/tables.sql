@@ -9,7 +9,6 @@ Turma VARCHAR(255),
 AlunoRA INT,
 MaiorIdade BOOLEAN,
 justificativa VARCHAR(255),
-LiberadoSec VARCHAR(255),
 AssinaturaAnaq VARCHAR(255),
 AssinaturaProf VARCHAR(255)
 );
