@@ -5,6 +5,13 @@ INSERT INTO Saida (id, NomeALuno, Curso, DataSaida, HoraSaida, Turma, AlunoRA, M
 (4, 'Ana Costa', 'História', '2024-09-04', '11:00:00', 'D', 445566, TRUE, TRUE, TRUE, TRUE),
 (5, 'Lucas Pereira', 'Física', '2024-09-05', '12:30:00', 'E', 778899, FALSE, FALSE, TRUE, FALSE);
 
+INSERT INTO SaidaProfessor (id, NomeProfessor, Curso, DataSaida, HoraSaida, Turma, ProfessorRA, MaiorIdade, LiberadoSec, AssinaturaAnaq, AssinaturaProf) VALUES 
+(1, 'João Silva', 'Matemática', '2024-09-01', '08:30:00', 'A', 123456, TRUE, TRUE, FALSE, TRUE),
+(2, 'Maria Oliveira', 'Biologia', '2024-09-02', '09:00:00', 'B', 654321, TRUE, FALSE, TRUE, TRUE),
+(3, 'Pedro Santos', 'Química', '2024-09-03', '10:15:00', 'C', 112233, FALSE, TRUE, FALSE, FALSE),
+(4, 'Ana Costa', 'História', '2024-09-04', '11:00:00', 'D', 445566, TRUE, TRUE, TRUE, TRUE),
+(5, 'Lucas Pereira', 'Física', '2024-09-05', '12:30:00', 'E', 778899, FALSE, FALSE, TRUE, FALSE);
+
 INSERT INTO Usuarios (Nif, Nome, Email, Senha, Telefone, Tipo) VALUES 
 (123456789, 'Carlos Almeida', 'carlos@example.com', 'senha123', 987654321, 'Docente'),
 (987654321, 'Fernanda Lima', 'fernanda@example.com', 'senha456', 123456789, 'Aluno'),
