@@ -14,13 +14,11 @@ async function createSaidaRecord(req, res) {
         assinaturaProf  
     } = req.body;  
 
-    // Verifica se a data foi fornecida  
     if (!datasaida) {  
         return res.status(400).json({ error: "Data de saída não pode estar vazia." });  
     }  
 
-    // Verifica se a data é uma string válida  
-    const datePattern = /^\d{4}-\d{2}-\d{2}$/; // Formato YYYY-MM-DD  
+    const datePattern = /^\d{4}-\d{2}-\d{2}$/; 
     if (!datePattern.test(datasaida)) {  
         return res.status(400).json({ error: "Data de saída deve estar no formato YYYY-MM-DD." });  
     }  
@@ -91,7 +89,7 @@ async function updateSaidaRecord(req, res) {
     try {  
         await pool.query(  
             "UPDATE Saida SET nomealuno = $1, curso = $2, datasaida = $3, horasaida = $4, turma = $5, alunora = $6, maioridade = $7,justificativa = $8,assinaturaAnaq = $9, assinaturaProf = $10 WHERE id = $11",  
-            [nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade,justificativa, assinaturaanaq, assinaturaprof, id]  
+            [nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade,justificativa, assinaturaAnaq, assinaturaProf, id]  
         );  
         res.json({ message: "Saida atualizada" });  
     } catch (error) {  
