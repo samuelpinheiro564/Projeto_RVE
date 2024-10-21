@@ -8,9 +8,10 @@ HoraSaida TIME,
 Turma VARCHAR(255),
 AlunoRA INT,
 MaiorIdade BOOLEAN,
-LiberadoSec BOOLEAN,
-AssinaturaAnaq BOOLEAN,
-AssinaturaProf BOOLEAN
+justificativa VARCHAR(255),
+LiberadoSec VARCHAR(255),
+AssinaturaAnaq VARCHAR(255),
+AssinaturaProf VARCHAR(255)
 );
 
 
