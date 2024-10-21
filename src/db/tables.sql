@@ -34,35 +34,35 @@ CREATE TABLE atestado (
     cid VARCHAR(255)
 );  
 
-CREATE TABLE RVES(
- Id SERIAL PRIMARY KEY ,
- Autor VARCHAR(255),
- Estudante VARCHAR(255),
- Curso VARCHAR(255),
- Turma VARCHAR(255),
- Data DATE,
- Hora TIME,
- Motivo VARCHAR(255),
- OrientacoesEstudante TEXT,
- DescricaoOcorrido TEXT,
- DocentesEnvolvidos TEXT[],
- Assinaturas Text[],
- Elogios TEXT,
- Dificuldades TEXT,
- Presenca TEXT
-);
-CREATE TABLE CampoTexto(
-    Id INT PRIMARY KEY ,
-    NifTextoDocente INT,
-    Texto TEXT,
-    Assinado BOOLEAN,
-    FOREIGN KEY (NifTextoDocente) REFERENCES Usuarios(Nif)
-);
-CREATE TABLE Forum(
-    Id INT PRIMARY KEY ,
-    IDRVE INT,
-    IDCampoTexto INT REFERENCES FROM  CampoTexto(Id) CASCADE,
-    Data DATE,
-   FOREIGN KEY (IdRVE) REFERENCES RVES(Id)
+CREATE TABLE rves(
+ Id SERIAL PRIMARY KEY,  
+ Autor VARCHAR(255),  
+ Estudante VARCHAR(255),  
+ Curso VARCHAR(255),  
+ Turma VARCHAR(255),  
+ Data DATE,  
+ Hora TIME,  
+ Motivo VARCHAR(255),  
+ OrientacoesEstudante TEXT,  
+ DescricaoOcorrido TEXT,  
+ DocentesEnvolvidos TEXT[],-- Array de texto para docentes envolvidos Assinaturas TEXT[], -- Array de texto para assinaturas Elogios TEXT,  
+ Dificuldades TEXT,  
+ assinaturas BOOLEAN[],
+ Presenca TEXT);  
+
+CREATE TABLE CampoTexto (  
+ Id SERIAL PRIMARY KEY,
+ nifUsuario INT, -- Usar SERIAL para auto incremento NifTextoDocente INT, -- Presumindo que Nif seja um inteiro Texto TEXT,    
+ CampoTexto VARCHAR(255),
+ FOREIGN KEY (nifUsuario) REFERENCES Usuarios(Nif)
+ ); -- Referência à tabela Usuarios);  
+
+CREATE TABLE Forum (  
+ Id SERIAL PRIMARY KEY, -- Corrigido o nome da coluna para IdCampoTexto Data DATE,  
+ IdRVE INT,
+ IdCampoTexto INT,
+ FOREIGN KEY (IdCampoTexto) REFERENCES CampoTexto(Id) ON DELETE CASCADE,  -- Referência à tabela CampoTexto);
+ FOREIGN KEY (IdRVE) REFERENCES RVES(Id) ON DELETE CASCADE  -- Referência à tabela CampoTexto);  
 );
 
+faça o controler de rve e o forum  e o campotexto com funcao assincrona

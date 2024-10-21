@@ -2,10 +2,9 @@ const express = require('express');
 const router = express.Router();
 const RveController = require("../Controller/Rve")
 
-router.post("/rve", RveController.createRveRecord);
-router.get("/rve", RveController.getRveRecords);
-router.get("/rve/:id", RveController.getRveRecordById);
-router.put("/rve/:id", RveController.updateRveRecord);
-router.delete("/rve/:id", RveController.deleteRveRecord);
+router.get("/rve", RveController.GetAllRves);
+router.post("/rve", RveController.CreateRve);
+router.put("/campotexto", RveController.EditRve);
+router.delete("/rve/:id", RveController.deleteRve);
 
 module.exports = router;
