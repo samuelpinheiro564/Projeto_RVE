@@ -48,7 +48,7 @@ CREATE TABLE atestado (
 );  
 
 CREATE TABLE rves(
- Id SERIAL PRIMARY KEY,  
+ Id INT PRIMARY KEY,  
  Autor VARCHAR(255),  
  Estudante VARCHAR(255),  
  Curso VARCHAR(255),  
@@ -64,7 +64,7 @@ CREATE TABLE rves(
  Presenca TEXT);  
 
 CREATE TABLE CampoTexto (  
- Id SERIAL PRIMARY KEY,
+ Id INT PRIMARY KEY,
  nifUsuario INT, -- Usar SERIAL para auto incremento NifTextoDocente INT, -- Presumindo que Nif seja um inteiro Texto TEXT,    
  CampoTexto VARCHAR(255),
  FOREIGN KEY (nifUsuario) REFERENCES Usuarios(Nif)
@@ -78,4 +78,4 @@ CREATE TABLE Forum (
  FOREIGN KEY (IdRVE) REFERENCES RVES(Id) ON DELETE CASCADE  -- Referência à tabela CampoTexto);  
 );
 
-faça o controler de rve e o forum  e o campotexto com funcao assincrona
+faça um select que pegue todos os comentarios de uma determinada rve 
