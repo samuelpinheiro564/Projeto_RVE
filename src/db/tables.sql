@@ -67,3 +67,4 @@ CREATE TABLE Forum (
 );
 
 faça um select que pegue todos os comentarios de uma determinada rve 
+

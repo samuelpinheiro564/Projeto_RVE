@@ -20,10 +20,15 @@ async function GetAllCampoTexto(req, res) {
         res.status(500).json({ error: err.message });
     }
 }
+async function getCampostextoRve(req, res) {
+    const IdRVE = parseInt(req.params.IdRVE);
+    const response = await pool.query("SELECT ct.Id, ct.nifUsuario,ct.CampoTexto FROM  Forum f JOIN CampoTexto ct ON f.IdCampoTexto = ct.Id WHERE  f.IdRVE = $1;", [IdRVE]);
+    res.json(response.rows);
+}
 
 async function getCampoTextoById(req, res) {
-    const Id = parseInt(req.params.Id);
-    const response = await pool.query("SELECT * FROM CampoTexto WHERE Id = $1", [Id]);
+    const id = parseInt(req.params.id);
+    const response = await pool.query("SELECT * FROM CampoTexto WHERE Id = $1", [id]);
     res.json(response.rows);
 }
 
@@ -51,5 +56,6 @@ module.exports = {
     GetAllCampoTexto,
     getCampoTextoById,
     updateCampoTexto,
-    deleteCampoTexto
+    deleteCampoTexto,
+    getCampostextoRve
 };

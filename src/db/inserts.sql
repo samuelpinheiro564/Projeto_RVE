@@ -72,5 +72,5 @@ INSERT INTO Forum (
     IdCampoTexto
 ) VALUES (
     1, -- Assuming this ID exists in RVES
-  4
+   724
 );
