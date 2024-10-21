@@ -40,6 +40,23 @@ async function createSaidaRecord(req, res) {
     }  
 }  
 
+async function createSaidaRecord(req, res) {
+    const { id,nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, liberadosec, assinaturaanaq, assinaturaprof } = req.body;
+    try {
+        const result = await pool.query(
+            `INSERT INTO Saida (id,nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, liberadosec, assinaturaanaq, assinaturaprof)  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10,$11) RETURNING *`,
+            [id,nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, liberadosec, assinaturaanaq, assinaturaprof]
+        );
+        res.status(201).json(result.rows[0]);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+
+}
+
+
 async function getSaidaRecords(req, res) {  
     try {  
         const result = await pool.query("SELECT * FROM Saida");  

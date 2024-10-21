@@ -1,22 +1,24 @@
 const pool = require('../config/dbConfig');
 
-async function createCampoTexto(req, res) {
-    const { niftextodocente, texto, assinado } = req.body;
-    const response = await pool.query(
-        "INSERT INTO CampoTexto (niftextodocente, texto, assinado) VALUES ($1, $2, $3)",
-        [niftextodocente, texto, assinado]
-    );
-    res.json({
-        message: "CampoTexto Added successfully",
-        body: {
-            CampoTexto: { niftextodocente, texto, assinado }
-        },
-    });
+async function CreateCampoTexto(req, res) {
+    const { NifUsuario, NifTextoDocente, Texto, CampoTexto } = req.body;
+    try {
+        const result = await pool.query(
+            'INSERT INTO CampoTexto (NifUsuario, NifTextoDocente, Texto, CampoTexto) VALUES ($1, $2, $3, $4) RETURNING *',
+            [NifUsuario, NifTextoDocente, Texto, CampoTexto]
+        );
+        res.json(result.rows[0]);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 }
-
-async function getCampoTexto(req, res) {
-    const response = await pool.query("SELECT * FROM CampoTexto");
-    res.status(200).json(response.rows);
+async function GetAllCampoTexto(req, res) {
+    try {
+        const result = await pool.query('SELECT * FROM CampoTexto');
+        res.json(result.rows);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 }
 
 async function getCampoTextoById(req, res) {
@@ -45,8 +47,8 @@ async function deleteCampoTexto(req, res) {
 }
 
 module.exports = {
-    createCampoTexto,
-    getCampoTexto,
+    CreateCampoTexto,
+    GetAllCampoTexto,
     getCampoTextoById,
     updateCampoTexto,
     deleteCampoTexto
