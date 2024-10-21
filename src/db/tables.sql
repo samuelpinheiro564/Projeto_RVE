@@ -1,3 +1,4 @@
+
 CREATE TABLE Saida(
 id SERIAL PRIMARY KEY ,
 NomeALuno VARCHAR(255),
@@ -11,6 +12,7 @@ LiberadoSec BOOLEAN,
 AssinaturaAnaq BOOLEAN,
 AssinaturaProf BOOLEAN
 );
+
 
 CREATE TABLE Usuarios(
     Nif INT PRIMARY KEY ,
