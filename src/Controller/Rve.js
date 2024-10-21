@@ -12,11 +12,11 @@ async function GetAllRves(req, res) {
 
 
 async function CreateRve(req, res) {
-    const {autor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, docentesenvolvidos, assinaturas, dificuldades,  presenca} = req.body;
+    const {id,autor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, docentesenvolvidos, assinaturas, dificuldades,  presenca} = req.body;
     try {
         const result = await pool.query(
-            'insert into rves (autor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, docentesenvolvidos, assinaturas,dificuldades, presenca) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) returning *',
-            [autor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, docentesenvolvidos, assinaturas, dificuldades, presenca]
+            'insert into rves (id,autor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, docentesenvolvidos, assinaturas,dificuldades, presenca) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13,$14) returning *',
+            [id,autor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, docentesenvolvidos, assinaturas, dificuldades, presenca]
         );
         res.json(result.rows[0]);
     } catch (err) {
