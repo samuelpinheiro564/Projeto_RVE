@@ -2,11 +2,11 @@ const pool = require('../config/dbConfig');
 
 
 async function createSaidaRecord(req, res) {
-    const { id,nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, liberadosec, assinaturaanaq, assinaturaprof } = req.body;
+    const {nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, liberadosec, assinaturaanaq, assinaturaprof } = req.body;
     try {
         const result = await pool.query(
-            `INSERT INTO Saida (id,nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, liberadosec, assinaturaanaq, assinaturaprof)  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10,$11) RETURNING *`,
-            [id,nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, liberadosec, assinaturaanaq, assinaturaprof]
+            `INSERT INTO Saida (nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, liberadosec, assinaturaanaq, assinaturaprof)  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
+            [nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, liberadosec, assinaturaanaq, assinaturaprof]
         );
         res.status(201).json(result.rows[0]);
     }

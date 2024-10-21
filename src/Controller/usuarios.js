@@ -22,7 +22,7 @@ async function CreateUser (req, res)  {
 
  async function AtualizaUser (req, res)  {
     const { nif } = req.params;
-    const { nome, email, senha, telefone, tipo } = req.body;
+    const { nome, email, senha,telefone,tipo} = req.body;
     await pool.query(
         "UPDATE Usuarios SET nome = $1, email = $2, senha = $3, telefone = $4, tipo = $5 WHERE nif = $6",
         [nome, email, senha, telefone, tipo, nif]
@@ -38,13 +38,12 @@ async function DeleteUSer (req, res)  {
 async function Login (req, res)  {
     try {
         const { nif } = req.params;
-        const { rows } = await pool.query("SELECT * FROM Usuarios WHERE nif = $1", [nif]);
+        const { rows } = await pool.query("SELECT * FROM usuarios WHERE nif = $1", [nif]);
         res.json(rows);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
     }
-  
 }
 
 module.exports = {

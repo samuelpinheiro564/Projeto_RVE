@@ -12,27 +12,13 @@ INSERT INTO Usuarios (Nif, Nome, Email, Senha, Telefone, Tipo) VALUES
 (234567890, 'Sofia Martins', 'sofia@example.com', 'senha101', 345678901, 'Aluno'),
 (345678901, 'Gustavo Ribeiro', 'gustavo@example.com', 'senha202', 456789012, 'Docente');
 
-INSERT INTO atestados (  
-    aluno,  
-    turma,  
-    curso,  
-    ra,  
-    data_inicial,  
-    data_final,  
-    justificativa,  
-    imagem,  
-    cid  
-) VALUES (  
-    'Maria Oliveira',  
-    '10B',  
-    'Ensino Médio',  
-    '654321',  
-    '2024-10-01',  
-    '2024-10-15',  
-    'Problemas de Saúde',  
-    'caminho/para/imagem.jpg',   
-    'A12'  
-);
+INSERT INTO atestado (nome_aluno, turma, curso, data_inicial, data_final, imagem,cid) VALUES   
+('João da Silva', '1A', 'Engenharia', '2023-01-01', '2023-06-30', NULL,'A01'),  
+('Maria Oliveira', '2B', 'Medicina', '2023-02-01', '2023-08-31', NULL,'B02'),  
+('Pedro Santos', '3C', 'Direito', '2023-03-01', '2023-12-31', NULL,'C03'),  
+('Ana Costa', '1D', 'Arquitetura', '2023-04-15', '2023-09-15', NULL,'D04'),  
+('Lucas Pereira', '2E', 'Biologia', '2023-05-01', '2023-11-01', NULL,'E05');
+ 
 INSERT INTO RVES ( Autor, Estudante, Curso, Turma, Data, Hora, Motivo, OrientacoesEstudante, DescricaoOcorrido, DocentesEnvolvidos, Assinaturas, Elogios, Dificuldades,Presenca) VALUES 
 ('Prof. Ana', 'Tiago Silva', 'Matemática', 'A', '2024-09-01', '08:30:00', 'Faltou à aula', 'Estudar mais', 'Faltou por motivo de saúde', 'Prof. Ana', 'Assinado', 'Bom aluno', 'Dificuldade em entender', 'Presente'),
 ('Prof. Carlos', 'Juliana Costa', 'História', 'B', '2024-09-02', '09:00:00', 'Comportamento', 'Melhorar postura', 'Comportamento inadequado', 'Prof. Carlos', 'Assinado', 'Participativa', 'Nenhuma', 'Presente'),

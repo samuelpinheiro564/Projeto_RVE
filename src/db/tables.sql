@@ -1,5 +1,5 @@
 CREATE TABLE Saida(
-id INT PRIMARY KEY ,
+id SERIAL PRIMARY KEY ,
 NomeALuno VARCHAR(255),
 Curso VARCHAR(255),
 DataSaida DATE,
@@ -21,18 +21,16 @@ CREATE TABLE Usuarios(
     Tipo VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE atestados (  
+CREATE TABLE atestado (  
     id SERIAL PRIMARY KEY,  
-    aluno TEXT NOT NULL,  
-    turma TEXT NOT NULL,  
-    curso TEXT NOT NULL,  
-    ra TEXT NOT NULL,  
+    nome_aluno VARCHAR(100) NOT NULL,  
+    turma VARCHAR(50) NOT NULL,  
+    curso VARCHAR(100) NOT NULL,  
     data_inicial DATE NOT NULL,  
     data_final DATE NOT NULL,  
-    justificativa TEXT NOT NULL, 
-      cid TEXT NOT NULL , 
-    imagem BYTEA     
-);
+    imagem BYTEA,
+    cid VARCHAR(255)
+);  
 
 CREATE TABLE RVES(
  Id SERIAL PRIMARY KEY ,
