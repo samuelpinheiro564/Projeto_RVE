@@ -1,22 +1,5 @@
 const pool = require('../config/dbConfig');
 
-<<<<<<< HEAD
-async function createAtestado(req, res) {  
-    const {  
-        aluno,curso,turma,ra,data_inicial,data_final,justificativa,imagem,cid
-    } = req.body;  
-
-    try {  
-        const result = await pool.query(  
-            "INSERT INTO atestados (aluno,curso,turma,ra,data_inicial,data_final,justificativa,imagem,cid) VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9) RETURNING *",  
-            [aluno,curso,turma,ra,data_inicial,data_final,justificativa,imagem,cid]  
-        );  
-        res.status(201).json(result.rows[0]);  
-    } catch (err) {  
-        res.status(500).json({ error: err.message });  
-    }  
-}  
-=======
 const createAtestado = async (req, res) => {
     const { nome_aluno, turma, curso, data_inicial, data_final, imagem, cid } = req.body;
   
@@ -55,7 +38,7 @@ async function getAtestadoById(req, res) {
         res.status(500).json({ error: err.message });
     }
 }
->>>>>>> 5870511c2dc6d124236b338523591aac3e0e7ac6
+
 
 async function updateAtestado(req, res) {
     const { id } = req.params;
