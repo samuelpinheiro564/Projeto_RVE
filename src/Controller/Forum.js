@@ -1,24 +1,27 @@
 const pool = require('../config/dbConfig');
 
-async function createForum(req, res) {
-    const { idrve, idcampotexto } = req.body;
-    const response = await pool.query(
-        "INSERT INTO Forum (idrve, idcampotexto) VALUES ($1, $2)",
-        [idrve, idcampotexto]
-    );
-    res.json({
-        message: "Forum Added successfully",
-        body: {
-            Forum: { idrve, idcampotexto }
-        },
-    });
+async function CreateForum(req, res) {
+    const { Data, IdRVE, IdCampoTexto } = req.body;
+    try {
+        const result = await pool.query(
+            'INSERT INTO Forum (Data, IdRVE, IdCampoTexto) VALUES ($1, $2, $3) RETURNING *',
+            [Data, IdRVE, IdCampoTexto]
+        );
+        res.json(result.rows[0]);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 }
 
-async function getForum(req, res) {
-    const response = await pool.query("SELECT * FROM Forum");
-    res.status(200).json(response.rows);
-}
 
+async function GetAllForum(req, res) {
+    try {
+        const result = await pool.query('SELECT * FROM Forum');
+        res.json(result.rows);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}
 async function getForumById(req, res) {
     const id = parseInt(req.params.id);
     const response = await pool.query("SELECT * FROM Forum WHERE Id = $1", [id]);
@@ -45,8 +48,8 @@ async function deleteForum(req, res) {
 }
 
 module.exports = {
-    createForum,
-    getForum,
+ CreateForum,
+    GetAllForum,
     getForumById,
     updateForum,
     deleteForum

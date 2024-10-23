@@ -1,27 +1,34 @@
 const pool = require('../config/dbConfig');
 
-async function createCampoTexto(req, res) {
-    const { niftextodocente, texto, assinado } = req.body;
-    const response = await pool.query(
-        "INSERT INTO CampoTexto (niftextodocente, texto, assinado) VALUES ($1, $2, $3)",
-        [niftextodocente, texto, assinado]
-    );
-    res.json({
-        message: "CampoTexto Added successfully",
-        body: {
-            CampoTexto: { niftextodocente, texto, assinado }
-        },
-    });
+async function CreateCampoTexto(req, res) {
+    const { id,nifusuario,campotexto } = req.body;
+    try {
+        const result = await pool.query(
+            'INSERT INTO CampoTexto (id,nifusuario,campotexto) VALUES ($1, $2,$3) RETURNING *',
+            [id,nifusuario,campotexto]
+        );
+        res.json(result.rows[0]);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 }
-
-async function getCampoTexto(req, res) {
-    const response = await pool.query("SELECT * FROM CampoTexto");
-    res.status(200).json(response.rows);
+async function GetAllCampoTexto(req, res) {
+    try {
+        const result = await pool.query('SELECT * FROM CampoTexto');
+        res.json(result.rows);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}
+async function getCampostextoRve(req, res) {
+    const IdRVE = parseInt(req.params.IdRVE);
+    const response = await pool.query("SELECT ct.Id, ct.nifUsuario,ct.CampoTexto FROM  Forum f JOIN CampoTexto ct ON f.IdCampoTexto = ct.Id WHERE  f.IdRVE = $1;", [IdRVE]);
+    res.json(response.rows);
 }
 
 async function getCampoTextoById(req, res) {
-    const Id = parseInt(req.params.Id);
-    const response = await pool.query("SELECT * FROM CampoTexto WHERE Id = $1", [Id]);
+    const id = parseInt(req.params.id);
+    const response = await pool.query("SELECT * FROM CampoTexto WHERE Id = $1", [id]);
     res.json(response.rows);
 }
 
@@ -45,9 +52,10 @@ async function deleteCampoTexto(req, res) {
 }
 
 module.exports = {
-    createCampoTexto,
-    getCampoTexto,
+    CreateCampoTexto,
+    GetAllCampoTexto,
     getCampoTextoById,
     updateCampoTexto,
-    deleteCampoTexto
+    deleteCampoTexto,
+    getCampostextoRve
 };

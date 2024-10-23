@@ -5,8 +5,8 @@ const UsuariosController = require("../Controller/usuarios")
 
 usuarios.post("/usuarios/", UsuariosController.CreateUser);
 usuarios.get("/usuarios", UsuariosController.AllUser);
-usuarios.get("/usuarios/:Nif", UsuariosController.Login);
-usuarios.put("/usuarios/:Nif", UsuariosController.AtualizaUser);
-usuarios.delete("/usuarios/:id", UsuariosController.DeleteUSer);
+usuarios.get("/usuarios/:nif", UsuariosController.Login);
+usuarios.put("/usuarios/:nif", UsuariosController.AtualizaUser);
+usuarios.delete("/usuarios/:nif", UsuariosController.DeleteUSer);
 
 module.exports = usuarios;

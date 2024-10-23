@@ -1,13 +1,13 @@
 const pool = require('../config/dbConfig');  
 
-async function createSaidaRecord(req, res) {  
+async function createSaidaProfessorRecord(req, res) {  
     const {  
-        nomealuno,  
+        nomeprofessor,  
         curso,  
         datasaida,  
         horasaida,  
         turma,  
-        alunora,  
+        professorra,  
         maioridade,  
         justificativa,
         assinaturaAnaq,  
@@ -29,9 +29,9 @@ async function createSaidaRecord(req, res) {
     
     try {  
         const result = await pool.query(  
-            `INSERT INTO Saida (nomealuno, curso, datasaida, horasaida, turma, alunora , maioridade, justificativa, assinaturaAnaq, assinaturaProf) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9,  $10) RETURNING *`,  
+            `INSERT INTO Saida (nomeprofessor, curso, datasaida, horasaida, turma, professorra , maioridade, justificativa, assinaturaAnaq, assinaturaProf) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9,  $10) RETURNING *`,  
 
-            [nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade,justificativa, assinaturaAnaq, assinaturaProf]  
+            [nomeprofessor, curso, datasaida, horasaida, turma, professorra, maioridade,justificativa, assinaturaAnaq, assinaturaProf]  
         );  
         res.status(201).json(result.rows[0]);  
     } catch (error) {  
@@ -40,12 +40,12 @@ async function createSaidaRecord(req, res) {
     }  
 }  
 
-async function createSaidaRecord(req, res) {
-    const { nomealuno, curso, datasaida, horasaida, turma, alunora , maioridade, justificativa, assinaturaAnaq, assinaturaProf } = req.body;
+async function createSaidaProfessorRecord(req, res) {
+    const { nomeprofessor, curso, datasaida, horasaida, turma, professorra , maioridade, justificativa, assinaturaAnaq, assinaturaProf } = req.body;
     try {
         const result = await pool.query(
-          `INSERT INTO Saida (nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, justificativa, assinaturaAnaq, assinaturaProf) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,  
-[nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, justificativa, assinaturaAnaq, assinaturaProf]  
+          `INSERT INTO Saida (nomeprofessor, curso, datasaida, horasaida, turma, professorra, maioridade, justificativa, assinaturaAnaq, assinaturaProf) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,  
+[nomeprofessor, curso, datasaida, horasaida, turma, professorra, maioridade, justificativa, assinaturaAnaq, assinaturaProf]  
         );
         res.status(201).json(result.rows[0]);
     }
@@ -57,7 +57,7 @@ async function createSaidaRecord(req, res) {
 }
 
 
-async function getSaidaRecords(req, res) {  
+async function getSaidaProfessorRecords(req, res) {  
     try {  
         const result = await pool.query("SELECT * FROM Saida");  
         res.status(200).json(result.rows);  
@@ -67,7 +67,7 @@ async function getSaidaRecords(req, res) {
     }  
 }  
 
-async function getSaidaRecordById(req, res) {  
+async function getSaidaProfessorRecordById(req, res) {  
     const { id } = req.params;  
     try {  
         const { rows } = await pool.query("SELECT * FROM Saida WHERE id = $1", [id]);  
@@ -78,15 +78,15 @@ async function getSaidaRecordById(req, res) {
     }  
 }  
 
-async function updateSaidaRecord(req, res) {  
+async function updateSaidaProfessorRecord(req, res) {  
     const { id } = req.params;  
     const {  
-        nomealuno,  
+        nomeprofessor,  
         curso,  
         datasaida,  
         horasaida,  
         turma,  
-        alunora,  
+        professorra,  
         maioridade,  
         justificativa,
         assinaturaAnaq,  
@@ -104,8 +104,8 @@ async function updateSaidaRecord(req, res) {
 
     try {  
         await pool.query(  
-            "UPDATE Saida SET nomealuno = $1, curso = $2, datasaida = $3, horasaida = $4, turma = $5, alunora = $6, maioridade = $7,justificativa = $8,assinaturaAnaq = $9, assinaturaProf = $10 WHERE id = $11",  
-            [nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade,justificativa, assinaturaAnaq, assinaturaProf, id]  
+            "UPDATE Saida SET nomeprofessor = $1, curso = $2, datasaida = $3, horasaida = $4, turma = $5, professorra = $6, maioridade = $7,justificativa = $8,assinaturaAnaq = $9, assinaturaProf = $10 WHERE id = $11",  
+            [nomeprofessor, curso, datasaida, horasaida, turma, professorra, maioridade,justificativa, assinaturaAnaq, assinaturaProf, id]  
         );  
         res.json({ message: "Saida atualizada" });  
     } catch (error) {  
@@ -116,7 +116,7 @@ async function updateSaidaRecord(req, res) {
 
 }  
 
-async function deleteSaidaRecord(req, res) {  
+async function deleteSaidaProfessorRecord(req, res) {  
     const { id } = req.params;  
     try {  
         await pool.query("DELETE FROM Saida WHERE id = $1", [id]);  
@@ -128,9 +128,9 @@ async function deleteSaidaRecord(req, res) {
 }
 
 module.exports = {  
-    createSaidaRecord,  
-    getSaidaRecords,  
-    getSaidaRecordById,  
-    updateSaidaRecord  ,
-    deleteSaidaRecord
+    createSaidaProfessorRecord,  
+    getSaidaProfessorRecords,  
+    getSaidaProfessorRecordById,  
+    updateSaidaProfessorRecord  ,
+    deleteSaidaProfessorRecord
 };
