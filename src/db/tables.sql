@@ -27,8 +27,8 @@ CREATE TABLE atestados (
     turma TEXT NOT NULL,  
     curso TEXT NOT NULL,  
     ra TEXT NOT NULL,  
-    data_inicial DATE NOT NULL,  
-    data_final DATE NOT NULL,  
+    data_inicial DATE,  
+    data_final DATE,  
     justificativa TEXT NOT NULL,  
     imagem TEXT,   
     cid TEXT NOT NULL  
