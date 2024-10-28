@@ -1,63 +1,93 @@
-const pool = require('../config/dbConfig');
+const pool = require('../config/dbConfig');  
 
-async function AllUser(req, res)  {
-try {
-    const { rows } = await pool.query("SELECT * FROM Usuarios");
-    res.json(rows);
+async function AllUsers(req, res)  {  // Corrigido para AllUsers  
+    try {  
+        const { rows } = await pool.query("SELECT * FROM Usuarios");  
+        res.json(rows);  
+    }  
+    catch (error) {  
+        console.error(error);  
+        res.status(500).json({ error: "Internal Server Error" });  
+    }  
+};  
+
+async function CreateUser(req, res) {  
+    const { nif, nome, email, senha, telefone, tipo } = req.body;  
+
+    // Validações  
+    if (telefone.length > 19) {  
+        return res.status(400).json({ error: "O telefone deve ter no máximo 19 caracteres." });  
+    }  
+
+
+    try {  
+        await pool.query(  
+            "INSERT INTO Usuarios (Nif, Nome, Email, Senha, Telefone, Tipo) VALUES ($1, $2, $3, $4, $5, $6)",  
+            [nif, nome, email, senha, telefone, tipo]  
+        );  
+        res.json({ message: "Usuário criado" });  
+    } catch (error) {  
+        console.error('Erro ao criar usuário:', error);  
+        res.status(500).json({ error: "Erro ao criar usuário" });  
+    }  
 }
-catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+
+
+
+async function AtualizaUser(req, res) {
+    const { nif } = req.params;
+    const { nome, email, senha, telefone, tipo } = req.body;
+
+    console.log('Dados recebidos:', { nif, nome, email, senha, telefone, tipo });
+
+    try {
+        await pool.query(
+            "UPDATE Usuarios SET nome = $1, email = $2, senha = $3, telefone = $4, tipo = $5 WHERE nif = $6",
+            [nome, email, senha, telefone, tipo, nif]
+        );
+        res.json({ message: "Usuário atualizado" });
+    } catch (error) {
+        console.error('Erro ao atualizar usuário:', error);
+        res.status(500).json({ error: "Erro ao atualizar usuário" });
+    }
 }
-};
 
-async function CreateUser (req, res)  {
-    const {nif,nome,email,senha,telefone,tipo} = req.body;
-    await pool.query(
-        "INSERT INTO Usuarios (nif,nome,email,senha,telefone,tipo) VALUES ($1,$2,$3,$4,$5,$6)",
-        [nif,nome,email,senha,telefone,tipo]
-    );
-    res.json({ message: "Usuario criado" });
-};
 
- async function AtualizaUser (req, res)  {
+
+async function DeleteUser(req, res) {
     const { nif } = req.params;
-    const { nome, email, senha,telefone,tipo} = req.body;
-    await pool.query(
-        "UPDATE Usuarios SET nome = $1, email = $2, senha = $3, telefone = $4, tipo = $5 WHERE nif = $6",
-        [nome, email, senha, telefone, tipo, nif]
-    );
-    res.json({ message: "Usuario atualizado" });
-};
 
-async function DeleteUSer (req, res)  {
-    const { nif } = req.params;
-    await pool.query("DELETE FROM Usuarios WHERE nif = $1", [nif]);
-    res.json({ message: "Usuario deletado" });
-};
-async function Login(req, res) {  
+    console.log('Dados recebidos:', { nif });
+
+    try {
+        await pool.query(
+            "DELETE FROM Usuarios WHERE nif = $1",
+            [nif]
+        );
+        res.json({ message: "Usuário deletado" });
+    } catch (error) {
+        console.error('Erro ao deletar usuário:', error);
+        res.status(500).json({ error: "Erro ao deletar usuário" });
+    }
+}
+
+
+
+async function Login(req, res)  {  
     try {  
         const { nif } = req.params;  
-        const { rows } = await pool.query("SELECT * FROM usuarios WHERE nif = $1", [nif]);  
-        
-        // Verificar se o array rows está vazio  
-        if (rows.length === 0) {  
-            // Retornar uma resposta indicando que nenhum usuário foi encontrado  
-            return res.status(404).json({ message: "Usuário não encontrado" });  
-        }  
-
-        // Retornar os dados do usuário se encontrado  
+        const { rows } = await pool.query("SELECT * FROM Usuarios WHERE nif = $1", [nif]);  // Corrigido para Usuarios  
         res.json(rows);  
     } catch (error) {  
         console.error(error);  
-        // Retornar uma resposta de erro genérica  
-        res.status(500).json({ message: "Ocorreu um erro no servidor" });  
+        res.status(500).json({ error: "Internal Server Error" });  
     }  
 }  
-module.exports = {
-    DeleteUSer,
-    AtualizaUser,
-    CreateUser,
-    AllUser,
-    Login
+
+module.exports = {  
+    DeleteUser,  
+    AtualizaUser,  
+    CreateUser,  
+    AllUsers,   
+    Login  
 }

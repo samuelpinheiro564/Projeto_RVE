@@ -8,15 +8,18 @@ async function GetAllRves(req, res) {
         res.status(500).json({ error: err.message });
     }
 }
+
 async function GetBYIDRVE(req, res) {
     try {
         const autor = req.params;
         const result = await pool.query('SELECT * FROM RVES WHERE autor = $1', [autor]);
+
         res.json(result.rows);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 }
+
 async function CreateRve(req, res) {
     const {id,autor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, docentesenvolvidos, assinaturas, dificuldades,  presenca} = req.body;
     try {
@@ -55,5 +58,6 @@ module.exports = {
     EditRve,
     deleteRve,
     GetBYIDRVE
+
 };
 
