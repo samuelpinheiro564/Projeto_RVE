@@ -9,6 +9,16 @@ async function GetAllRves(req, res) {
     }
 }
 
+async function GettRveBYId(req, res) {
+    try {
+        const NifAutor = parseInt(req.params.NifAutor);
+        const result = await pool.query('SELECT * FROM RVES WHERE NifAutor=$1', [NifAutor]);
+        res.json(result.rows);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}
+
 
 
 async function CreateRve(req, res) {
@@ -47,6 +57,7 @@ module.exports = {
     GetAllRves,
     CreateRve,
     EditRve,
-    deleteRve
+    deleteRve,
+    GettRveBYId
 };
 

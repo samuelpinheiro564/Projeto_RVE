@@ -27,8 +27,13 @@ INSERT INTO atestado (nome_aluno, turma, curso, data_inicial, data_final, imagem
 ('Lucas Pereira', '2E', 'Biologia', '2023-05-01', '2023-11-01', NULL,'E05');
 -- Insert into RVES
 INSERT INTO RVES (
+<<<<<<< HEAD
+    Id,
+    NifAutor, 
+=======
     id,
     Autor, 
+>>>>>>> 98df4b8f15638a2cd31533bb6fe6747e22c268b9
     Estudante, 
     Curso, 
     Turma, 
@@ -42,8 +47,13 @@ INSERT INTO RVES (
     assinaturas, 
     Presenca
 ) VALUES (
+<<<<<<< HEAD
+    11111111,
+    123456789, 
+=======
     11,
     'Autor Exemplo', 
+>>>>>>> 98df4b8f15638a2cd31533bb6fe6747e22c268b9
     'Estudante Exemplo', 
     'Curso Exemplo', 
     'Turma Exemplo', 
@@ -60,17 +70,21 @@ INSERT INTO RVES (
 
 -- Insert into CampoTexto
 INSERT INTO CampoTexto (
+    id,
  nifUsuario, 
  CampoTexto 
 ) VALUES (
+    15151155,
     123456789, 
     'Campo de texto exemplo'
 );
 
 INSERT INTO CampoTexto (
+    id,
  nifUsuario, 
  CampoTexto 
 ) VALUES (
+    121212,
     987654321, 
     'Campo de texto exemplo'
 );
@@ -80,6 +94,6 @@ INSERT INTO Forum (
     IdRVE, 
     IdCampoTexto
 ) VALUES (
-    1, -- Assuming this ID exists in RVES
-   724
+    11111111, -- Assuming this ID exists in RVES
+   121212
 );

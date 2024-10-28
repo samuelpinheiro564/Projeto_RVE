@@ -13,19 +13,7 @@ AssinaturaAnaq VARCHAR(255),
 AssinaturaProf VARCHAR(255)
 );
 
-CREATE TABLE SaidaProfessor(
-id SERIAL PRIMARY KEY ,
-NomeProfessor VARCHAR(255),
-Curso VARCHAR(255),
-DataSaida DATE,
-HoraSaida TIME,
-Turma VARCHAR(255),
-ProfessorRA INT,
-MaiorIdade BOOLEAN,
-justificativa VARCHAR(255),
-AssinaturaAnaq VARCHAR(255),
-AssinaturaProf VARCHAR(255)
-);
+
 
 CREATE TABLE Usuarios(
     Nif INT PRIMARY KEY ,
@@ -36,20 +24,12 @@ CREATE TABLE Usuarios(
     Tipo VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE atestado (  
-    id SERIAL PRIMARY KEY,  
-    nome_aluno VARCHAR(100) NOT NULL,  
-    turma VARCHAR(50) NOT NULL,  
-    curso VARCHAR(100) NOT NULL,  
-    data_inicial DATE NOT NULL,  
-    data_final DATE NOT NULL,  
-    imagem BYTEA,
-    cid VARCHAR(255)
-);  
+
 
 CREATE TABLE rves(
  Id INT PRIMARY KEY,  
- Autor VARCHAR(255),  
+ NifAutor INT,
+FOREIGN KEY (NifAutor) REFERENCES Usuarios(Nif),
  Estudante VARCHAR(255),  
  Curso VARCHAR(255),  
  Turma VARCHAR(255),  
