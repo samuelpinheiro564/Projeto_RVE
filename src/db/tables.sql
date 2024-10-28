@@ -9,10 +9,10 @@ Turma VARCHAR(255),
 AlunoRA INT,
 MaiorIdade BOOLEAN,
 justificativa VARCHAR(255),
-LiberadoSec VARCHAR(255),
 AssinaturaAnaq VARCHAR(255),
 AssinaturaProf VARCHAR(255)
 );
+
 
 
 CREATE TABLE Usuarios(
@@ -24,16 +24,7 @@ CREATE TABLE Usuarios(
     Tipo VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE atestado (  
-    id SERIAL PRIMARY KEY,  
-    nome_aluno VARCHAR(100) NOT NULL,  
-    turma VARCHAR(50) NOT NULL,  
-    curso VARCHAR(100) NOT NULL,  
-    data_inicial DATE NOT NULL,  
-    data_final DATE NOT NULL,  
-    imagem BYTEA,
-    cid VARCHAR(255)
-);  
+
 
 CREATE TABLE rves(
  Id INT PRIMARY KEY,  
