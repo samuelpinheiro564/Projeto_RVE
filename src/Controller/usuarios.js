@@ -35,17 +35,25 @@ async function DeleteUSer (req, res)  {
     await pool.query("DELETE FROM Usuarios WHERE nif = $1", [nif]);
     res.json({ message: "Usuario deletado" });
 };
-async function Login (req, res)  {
-    try {
-        const { nif } = req.params;
-        const { rows } = await pool.query("SELECT * FROM usuarios WHERE nif = $1", [nif]);
-        res.json(rows);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Internal Server Error" });
-    }
-}
+async function Login(req, res) {  
+    try {  
+        const { nif } = req.params;  
+        const { rows } = await pool.query("SELECT * FROM usuarios WHERE nif = $1", [nif]);  
+        
+        // Verificar se o array rows está vazio  
+        if (rows.length === 0) {  
+            // Retornar uma resposta indicando que nenhum usuário foi encontrado  
+            return res.status(404).json({ message: "Usuário não encontrado" });  
+        }  
 
+        // Retornar os dados do usuário se encontrado  
+        res.json(rows);  
+    } catch (error) {  
+        console.error(error);  
+        // Retornar uma resposta de erro genérica  
+        res.status(500).json({ message: "Ocorreu um erro no servidor" });  
+    }  
+}  
 module.exports = {
     DeleteUSer,
     AtualizaUser,

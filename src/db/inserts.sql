@@ -43,7 +43,7 @@ INSERT INTO RVES (
     Presenca
 ) VALUES (
     11,
-    'Autor Exemplo', 
+    123456789, 
     'Estudante Exemplo', 
     'Curso Exemplo', 
     'Turma Exemplo', 
