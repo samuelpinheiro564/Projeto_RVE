@@ -28,8 +28,7 @@ CREATE TABLE Usuarios(
 
 CREATE TABLE rves(
  Id INT PRIMARY KEY,  
- Autor INT,
- FOREIGN  KEY (Autor) REFERENCES Usuarios(Nif),
+ Auto VARCHAR(255),
  Estudante VARCHAR(255),  
  Curso VARCHAR(255),  
  Turma VARCHAR(255),  
