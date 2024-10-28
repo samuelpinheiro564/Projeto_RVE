@@ -14,11 +14,15 @@ async function AllUsers(req, res)  {  // Corrigido para AllUsers
 async function CreateUser(req, res) {  
     const { nif, nome, email, senha, telefone, tipo } = req.body;  
 
-    console.log('Dados recebidos:', { nif, nome, email, senha, telefone, tipo });  
+    // Validações  
+    if (telefone.length > 19) {  
+        return res.status(400).json({ error: "O telefone deve ter no máximo 19 caracteres." });  
+    }  
+
 
     try {  
         await pool.query(  
-            "INSERT INTO Usuarios (nif, nome, email, senha, telefone, tipo) VALUES ($1, $2, $3, $4, $5, $6)",  
+            "INSERT INTO Usuarios (Nif, Nome, Email, Senha, Telefone, Tipo) VALUES ($1, $2, $3, $4, $5, $6)",  
             [nif, nome, email, senha, telefone, tipo]  
         );  
         res.json({ message: "Usuário criado" });  
@@ -26,7 +30,9 @@ async function CreateUser(req, res) {
         console.error('Erro ao criar usuário:', error);  
         res.status(500).json({ error: "Erro ao criar usuário" });  
     }  
-};
+}
+
+
 
 async function AtualizaUser(req, res) {
     const { nif } = req.params;
