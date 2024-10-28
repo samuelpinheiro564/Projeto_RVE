@@ -37,7 +37,8 @@ CREATE TABLE atestado (
 
 CREATE TABLE rves(
  Id INT PRIMARY KEY,  
- Autor VARCHAR(255),  
+ NifAutor INT,
+FOREIGN KEY (NifAutor) REFERENCES Usuarios(Nif),
  Estudante VARCHAR(255),  
  Curso VARCHAR(255),  
  Turma VARCHAR(255),  
