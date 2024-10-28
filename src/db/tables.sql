@@ -42,6 +42,14 @@ CREATE TABLE rves(
  assinaturas BOOLEAN[],
  Presenca TEXT);  
 
+ CREATE TABLE envolvidosRVE(
+    Id INT PRIMARY KEY,
+    IdRVE INT,
+    Nif INT,
+    FOREIGN KEY (IdRVE) REFERENCES RVES(Id) ON DELETE CASCADE
+    FOREIGN KEY (Nif) REFERENCES Usuarios(Nif) ON DELETE CASCADE
+ );
+
 CREATE TABLE CampoTexto (  
  Id INT PRIMARY KEY,
  nifUsuario INT, -- Usar SERIAL para auto incremento NifTextoDocente INT, -- Presumindo que Nif seja um inteiro Texto TEXT,    
