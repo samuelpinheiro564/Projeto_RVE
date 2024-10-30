@@ -51,7 +51,7 @@ CREATE TABLE CampoTexto (
  ); -- Referência à tabela Usuarios);  
 
 CREATE TABLE Forum (  
- Id SERIAL PRIMARY KEY, -- Corrigido o nome da coluna para IdCampoTexto Data DATE,  
+ Id SERIAL PRIMARY KEY,  
  IdRVE INT,
  IdCampoTexto INT,
  FOREIGN KEY (IdCampoTexto) REFERENCES CampoTexto(Id) ON DELETE CASCADE,  -- Referência à tabela CampoTexto);

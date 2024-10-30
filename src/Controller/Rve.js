@@ -22,11 +22,11 @@ async function GettRveBYId(req, res) {
 
 
 async function CreateRve(req, res) {
-    const {id,autor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, docentesenvolvidos, assinaturas, dificuldades,  presenca} = req.body;
+    const {id,NifAutor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, docentesenvolvidos, assinaturas, dificuldades,  presenca} = req.body;
     try {
         const result = await pool.query(
-            'insert into rves (id,autor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, docentesenvolvidos, assinaturas,dificuldades, presenca) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13,$14) returning *',
-            [id,autor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, docentesenvolvidos, assinaturas, dificuldades, presenca]
+            'insert into rves (id,NifAutor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, docentesenvolvidos, assinaturas,dificuldades, presenca) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13,$14) returning *',
+            [id,NifAutor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, docentesenvolvidos, assinaturas, dificuldades, presenca]
         );
         res.json(result.rows[0]);
     } catch (err) {
@@ -39,7 +39,7 @@ async function EditRve(req, res) {
     const { Autor, Estudante, Curso, Turma, Data, Hora, Motivo, OrientacoesEstudante, DescricaoOcorrido, DocentesEnvolvidos, Assinaturas, Elogios, Dificuldades, AssinaturasBoolean, Presenca } = req.body;
 
     const response = await pool.query(
-        "UPDATE RVES SET Autor = $1, Estudante = $2, Curso = $3, Turma = $4, Data = $5, Hora = $6, Motivo = $7, OrientacoesEstudante = $8, DescricaoOcorrido = $9, DocentesEnvolvidos = $10, Assinaturas = $11, Elogios = $12, Dificuldades = $13, AssinaturasBoolean = $14, Presenca = $15 WHERE Id = $16",
+        "UPDATE RVES SET NifAutor = $1, Estudante = $2, Curso = $3, Turma = $4, Data = $5, Hora = $6, Motivo = $7, OrientacoesEstudante = $8, DescricaoOcorrido = $9, DocentesEnvolvidos = $10, Assinaturas = $11, Elogios = $12, Dificuldades = $13, AssinaturasBoolean = $14, Presenca = $15 WHERE Id = $16",
         [Autor, Estudante, Curso, Turma, Data, Hora, Motivo, OrientacoesEstudante, DescricaoOcorrido, DocentesEnvolvidos, Assinaturas, Elogios, Dificuldades, AssinaturasBoolean, Presenca, Id]
     );
     res.json("RVE Updated Successfully");
