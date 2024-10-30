@@ -31,8 +31,32 @@ async function CreateUser(req, res) {
         res.status(500).json({ error: "Erro ao criar usuário" });  
     }  
 }
-
-
+async function fetchUsuariosPorRVE(req, res) {
+    try {
+        const id = req.params.id;
+        const query = `
+            SELECT 
+                rves.Id AS RVE_Id,
+                Usuarios.Nif AS Usuario_Nif,
+                Usuarios.Nome AS Usuario_Nome
+            FROM 
+                rves
+            JOIN 
+                forum ON rves.Id = forum.IdRVE
+            JOIN 
+                Usuarios ON  forum.Nif = Usuarios.Nif
+            WHERE 
+                rves.Id = $1
+            ORDER BY 
+                rves.Id;
+        `;
+        const result = await pool.query(query, [id]);
+        return res.json(result.rows);
+    } catch (err) {
+        console.error('Erro ao buscar usuários por RVE:', err);
+        return res.status(500).json({ error: 'Erro ao buscar usuários por RVE' });
+    }
+}
 
 async function AtualizaUser(req, res) {
     const { nif } = req.params;
@@ -89,5 +113,7 @@ module.exports = {
     AtualizaUser,  
     CreateUser,  
     AllUsers,   
-    Login  
+    Login,
+fetchUsuariosPorRVE
+
 }

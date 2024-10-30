@@ -40,21 +40,19 @@ CREATE TABLE rves(
  DescricaoOcorrido TEXT,  
  DocentesEnvolvidos TEXT[],-- Array de texto para docentes envolvidos Assinaturas TEXT[], -- Array de texto para assinaturas Elogios TEXT,  
  Dificuldades TEXT,  
+ nifDocentes INT,
+ FOREIGN KEY (nifDocentes) REFERENCES Usuarios(Nif) ON DELETE CASCADE,  -- Referência à tabela Usuarios);
  assinaturas BOOLEAN[],
- Presenca TEXT);  
+ Presenca TEXT
+ );  
 
- CREATE TABLE envolvidosRVE(
-    Id INT PRIMARY KEY,
-    IdRVE INT,
-    Nif INT,
-    FOREIGN KEY (IdRVE) REFERENCES RVES(Id) ON DELETE CASCADE
-    FOREIGN KEY (Nif) REFERENCES Usuarios(Nif) ON DELETE CASCADE
- );
 
 CREATE TABLE CampoTexto (  
  Id INT PRIMARY KEY,
  nifUsuario INT, -- Usar SERIAL para auto incremento NifTextoDocente INT, -- Presumindo que Nif seja um inteiro Texto TEXT,    
  CampoTexto VARCHAR(255),
+ hora TIME,
+ data DATE,
  FOREIGN KEY (nifUsuario) REFERENCES Usuarios(Nif)
  ); -- Referência à tabela Usuarios);  
 
@@ -62,6 +60,8 @@ CREATE TABLE Forum (
  Id SERIAL PRIMARY KEY,  
  IdRVE INT,
  IdCampoTexto INT,
+ Nif INT,
+ FOREIGN KEY (Nif) REFERENCES Usuarios(Nif) ON DELETE CASCADE,  -- Referência à tabela Usuarios);
  FOREIGN KEY (IdCampoTexto) REFERENCES CampoTexto(Id) ON DELETE CASCADE,  -- Referência à tabela CampoTexto);
  FOREIGN KEY (IdRVE) REFERENCES RVES(Id) ON DELETE CASCADE  -- Referência à tabela CampoTexto);  
 );

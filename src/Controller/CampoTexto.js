@@ -21,8 +21,8 @@ async function GetAllCampoTexto(req, res) {
     }
 }
 async function getCampostextoRve(req, res) {
-    const IdRVE = parseInt(req.params.IdRVE);
-    const response = await pool.query("SELECT ct.Id, ct.nifUsuario,ct.CampoTexto FROM  Forum f JOIN CampoTexto ct ON f.IdCampoTexto = ct.Id WHERE  f.IdRVE = $1;", [IdRVE]);
+    const idrve = parseInt(req.params);
+    const response = await pool.query("SELECT ct.Id, ct.nifUsuario,ct.CampoTexto FROM  Forum f JOIN CampoTexto ct ON f.IdCampoTexto = ct.Id WHERE  f.IdRVE = $1;", [idrve]);
     res.json(response.rows);
 }
 

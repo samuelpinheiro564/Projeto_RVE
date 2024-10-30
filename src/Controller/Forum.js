@@ -1,11 +1,11 @@
 const pool = require('../config/dbConfig');
 
 async function CreateForum(req, res) {
-    const { Data, IdRVE, IdCampoTexto } = req.body;
+    const { Nif, IdRVE, IdCampoTexto } = req.body;
     try {
         const result = await pool.query(
-            'INSERT INTO Forum (Data, IdRVE, IdCampoTexto) VALUES ($1, $2, $3) RETURNING *',
-            [Data, IdRVE, IdCampoTexto]
+            'INSERT INTO Forum (Nif, IdRVE, IdCampoTexto) VALUES ($1, $2, $3) RETURNING *',
+            [Nif, IdRVE, IdCampoTexto]
         );
         res.json(result.rows[0]);
     } catch (err) {
