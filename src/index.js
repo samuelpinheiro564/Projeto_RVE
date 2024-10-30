@@ -25,7 +25,7 @@ app.use(RveRoutes);
 
 
 app.get("/", (req, res) => {
-  res.send("API do projeto de atestados");
+  res.send("API do projeto de RVE Funcionando");
 }
 );
 
