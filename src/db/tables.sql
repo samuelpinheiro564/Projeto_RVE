@@ -28,7 +28,8 @@ CREATE TABLE Usuarios(
 
 CREATE TABLE rves(
  Id INT PRIMARY KEY,  
- Auto VARCHAR(255),
+ NifAutor INT,
+ FOREIGN KEY (NifAutor) REFERENCES Usuarios(Nif) ON DELETE CASCADE,
  Estudante VARCHAR(255),  
  Curso VARCHAR(255),  
  Turma VARCHAR(255),  

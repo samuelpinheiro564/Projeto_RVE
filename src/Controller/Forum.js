@@ -22,9 +22,9 @@ async function GetAllForum(req, res) {
         res.status(500).json({ error: err.message });
     }
 }
-async function getForumById(req, res) {
-    const id = parseInt(req.params.id);
-    const response = await pool.query("SELECT * FROM Forum WHERE Id = $1", [id]);
+async function getForumByIdRve(req, res) {
+    const IdRVE = parseInt(req.params);
+    const response = await pool.query("SELECT * FROM Forum WHERE IdRVE = $1", [IdRVE]);
     res.json(response.rows);
 }
 
@@ -50,7 +50,7 @@ async function deleteForum(req, res) {
 module.exports = {
  CreateForum,
     GetAllForum,
-    getForumById,
+    getForumByIdRve,
     updateForum,
     deleteForum
 };
