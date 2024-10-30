@@ -54,17 +54,10 @@ CREATE TABLE CampoTexto (
  hora TIME,
  data DATE,
  FOREIGN KEY (nifUsuario) REFERENCES Usuarios(Nif)
+  IdRVE INT,
  ); -- Referência à tabela Usuarios);  
 
-CREATE TABLE Forum (  
- Id SERIAL PRIMARY KEY,  
- IdRVE INT,
- IdCampoTexto INT,
- Nif INT,
- FOREIGN KEY (Nif) REFERENCES Usuarios(Nif) ON DELETE CASCADE,  -- Referência à tabela Usuarios);
- FOREIGN KEY (IdCampoTexto) REFERENCES CampoTexto(Id) ON DELETE CASCADE,  -- Referência à tabela CampoTexto);
- FOREIGN KEY (IdRVE) REFERENCES RVES(Id) ON DELETE CASCADE  -- Referência à tabela CampoTexto);  
-);
+
 
 faça um select que pegue todos os comentarios de uma determinada rve 
 

@@ -54,21 +54,29 @@ INSERT INTO RVES (
 -- Insert into CampoTexto
 INSERT INTO CampoTexto (
     id,
- nifUsuario, 
+ nifUsuario,
+       hora,
+ data, 
  CampoTexto 
 ) VALUES (
-    2,
+    4,
     567890123, 
+    '11:00:00',
+    '2024-10-21',
     'AAAAAAAAAA'
 );
 
 INSERT INTO CampoTexto (
     id,
  nifUsuario, 
+  hora,
+ data,
  CampoTexto 
 ) VALUES (
-    121212,
-    987654321, 
+    3,
+    123456789, 
+    '10:00:00',
+    '2024-10-21',
     'Campo de texto exemplo'
 );
 
@@ -80,5 +88,5 @@ INSERT INTO Forum (
 ) VALUES (
     567890123,
     11, -- Assuming this ID exists in RVES
-2
+   3
 );
