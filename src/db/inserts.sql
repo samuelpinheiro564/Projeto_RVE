@@ -27,13 +27,8 @@ INSERT INTO atestado (nome_aluno, turma, curso, data_inicial, data_final, imagem
 ('Lucas Pereira', '2E', 'Biologia', '2023-05-01', '2023-11-01', NULL,'E05');
 -- Insert into RVES
 INSERT INTO RVES (
-<<<<<<< HEAD
-    Id,
-    NifAutor, 
-=======
     id,
     Autor, 
->>>>>>> 98df4b8f15638a2cd31533bb6fe6747e22c268b9
     Estudante, 
     Curso, 
     Turma, 
@@ -47,13 +42,9 @@ INSERT INTO RVES (
     assinaturas, 
     Presenca
 ) VALUES (
-<<<<<<< HEAD
-    11111111,
-    123456789, 
-=======
+
     11,
-    'Autor Exemplo', 
->>>>>>> 98df4b8f15638a2cd31533bb6fe6747e22c268b9
+    123456789, 
     'Estudante Exemplo', 
     'Curso Exemplo', 
     'Turma Exemplo', 

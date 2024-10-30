@@ -28,8 +28,7 @@ CREATE TABLE Usuarios(
 
 CREATE TABLE rves(
  Id INT PRIMARY KEY,  
- NifAutor INT,
-FOREIGN KEY (NifAutor) REFERENCES Usuarios(Nif),
+ Auto VARCHAR(255),
  Estudante VARCHAR(255),  
  Curso VARCHAR(255),  
  Turma VARCHAR(255),  
@@ -42,6 +41,14 @@ FOREIGN KEY (NifAutor) REFERENCES Usuarios(Nif),
  Dificuldades TEXT,  
  assinaturas BOOLEAN[],
  Presenca TEXT);  
+
+ CREATE TABLE envolvidosRVE(
+    Id INT PRIMARY KEY,
+    IdRVE INT,
+    Nif INT,
+    FOREIGN KEY (IdRVE) REFERENCES RVES(Id) ON DELETE CASCADE
+    FOREIGN KEY (Nif) REFERENCES Usuarios(Nif) ON DELETE CASCADE
+ );
 
 CREATE TABLE CampoTexto (  
  Id INT PRIMARY KEY,

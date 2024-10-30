@@ -9,17 +9,16 @@ async function GetAllRves(req, res) {
     }
 }
 
-async function GettRveBYId(req, res) {
+async function GetBYIDRVE(req, res) {
     try {
-        const NifAutor = parseInt(req.params.NifAutor);
-        const result = await pool.query('SELECT * FROM RVES WHERE NifAutor=$1', [NifAutor]);
+        const autor = req.params;
+        const result = await pool.query('SELECT * FROM RVES WHERE autor = $1', [autor]);
+
         res.json(result.rows);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 }
-
-
 
 async function CreateRve(req, res) {
     const {id,NifAutor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, docentesenvolvidos, assinaturas, dificuldades,  presenca} = req.body;
@@ -58,6 +57,7 @@ module.exports = {
     CreateRve,
     EditRve,
     deleteRve,
-    GettRveBYId
+    GetBYIDRVE
+
 };
 
