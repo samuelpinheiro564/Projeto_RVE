@@ -44,7 +44,13 @@ CREATE TABLE rves(
  FOREIGN KEY (nifDocentes) REFERENCES Usuarios(Nif) ON DELETE CASCADE,  -- Referência à tabela Usuarios);
  assinaturas BOOLEAN[],
  Presenca TEXT
- );  
+ );
+
+ CREATE TABLE rve_usuarios(
+    id_rve INT,
+    usuario_nif INT,
+PRIMARY KEY (id_rve, usuario_nif)
+ );
 
 
 CREATE TABLE CampoTexto (  

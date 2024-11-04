@@ -4,7 +4,7 @@ async function CreateCampoTexto(req, res) {
     const { id,nifusuario,campotexto } = req.body;
     try {
         const result = await pool.query(
-            'INSERT INTO CampoTexto (id,nifusuario,campotexto) VALUES ($1, $2,$3) RETURNING *',
+            'INSERT INTO CampoTexto (id,,campotexto) VALUES ($1, $2,$3) RETURNING *',
             [id,nifusuario,campotexto]
         );
         res.json(result.rows[0]);
