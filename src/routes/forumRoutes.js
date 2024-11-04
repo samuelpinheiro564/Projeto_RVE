@@ -4,7 +4,7 @@ const ForumController = require("../Controller/Forum")
 
 
 router.post("/rve_usuario", ForumController.CreateRve);
-router.get("/rve_usuario/:id_rve", ForumController.getAllRveByIdRve);
+router.get("/rve_usuario/:usuario_nif", ForumController.getAllRveByIdRve);
 
 
 module.exports = router;

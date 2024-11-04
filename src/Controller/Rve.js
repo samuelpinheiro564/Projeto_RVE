@@ -11,8 +11,8 @@ async function GetAllRves(req, res) {
 
 async function GetBYIDRVE(req, res) {
     try {
-        const autor = req.params;
-        const result = await pool.query('SELECT * FROM RVES WHERE autor = $1', [autor]);
+        const id = req.params;
+        const result = await pool.query('SELECT * FROM RVES WHERE id = $1', [id]);
 
         res.json(result.rows);
     } catch (err) {
