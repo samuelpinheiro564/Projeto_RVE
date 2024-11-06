@@ -48,7 +48,7 @@ CREATE TABLE rves(
     id SERIAL PRIMARY KEY,
     id_rve INT,
     usuario_nif INT,
-    
+    FOREIGN KEY (id_rve) REFERENCES rves(Id) ON DELETE CASCADE,
 
  );
 
