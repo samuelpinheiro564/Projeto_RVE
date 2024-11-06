@@ -49,7 +49,7 @@ CREATE TABLE rves(
     id_rve INT,
     usuario_nif INT,
     FOREIGN KEY (id_rve) REFERENCES rves(Id) ON DELETE CASCADE,
-
+    FOREIGN KEY (usuario_nif) REFERENCES Usuarios(Nif) ON DELETE CASCADE
  );
 
 
