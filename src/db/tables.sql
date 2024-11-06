@@ -45,9 +45,11 @@ CREATE TABLE rves(
  );
 
  CREATE TABLE rve_usuarios(
+    id SERIAL PRIMARY KEY,
     id_rve INT,
     usuario_nif INT,
-PRIMARY KEY (id_rve, usuario_nif)
+    
+
  );
 
 
