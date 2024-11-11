@@ -35,12 +35,8 @@ CREATE TABLE rves(
  Hora TIME,  
  Motivo VARCHAR(255),  
  OrientacoesEstudante TEXT,  
- DescricaoOcorrido TEXT,  
- DocentesEnvolvidos TEXT[],-- Array de texto para docentes envolvidos Assinaturas TEXT[], -- Array de texto para assinaturas Elogios TEXT,  
- Dificuldades TEXT,  
- nifDocentes INT,
- FOREIGN KEY (nifDocentes) REFERENCES Usuarios(Nif) ON DELETE CASCADE,  -- Referência à tabela Usuarios);
- assinaturas BOOLEAN[],
+ DescricaoOcorrido TEXT,  -- Array de texto para docentes envolvidos Assinaturas TEXT[], -- Array de texto para assinaturas Elogios TEXT,  
+ Dificuldades TEXT,   -- Referência à tabela Usuarios);
  Presenca TEXT
  );
 
