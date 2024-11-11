@@ -6,7 +6,7 @@ router.get("/rve", RveController.GetAllRves);
 router.post("/rve", RveController.CreateRve);
 router.put("/campotexto", RveController.EditRve);
 router.delete("/rve/:id", RveController.deleteRve);
-router.get("/rve/:autor", RveController.GetBYIDRVE);
+router.get("/rve/:id", RveController.GetBYIDRVE);
 ;
 
 

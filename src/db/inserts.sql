@@ -80,13 +80,4 @@ INSERT INTO CampoTexto (
     'Campo de texto exemplo'
 );
 
--- Insert into Forum
-INSERT INTO Forum (
-    Nif,
-    IdRVE, 
-    IdCampoTexto
-) VALUES (
-    567890123,
-    11, -- Assuming this ID exists in RVES
-   3
-);
+

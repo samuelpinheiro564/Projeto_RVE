@@ -13,8 +13,6 @@ AssinaturaAnaq VARCHAR(255),
 AssinaturaProf VARCHAR(255)
 );
 
-
-
 CREATE TABLE Usuarios(
     Nif INT PRIMARY KEY ,
     Nome VARCHAR(255),
@@ -47,9 +45,11 @@ CREATE TABLE rves(
  );
 
  CREATE TABLE rve_usuarios(
+    id SERIAL PRIMARY KEY,
     id_rve INT,
     usuario_nif INT,
-PRIMARY KEY (id_rve, usuario_nif)
+    FOREIGN KEY (id_rve) REFERENCES rves(Id) ON DELETE CASCADE,
+    FOREIGN KEY (usuario_nif) REFERENCES Usuarios(Nif) ON DELETE CASCADE
  );
 
 

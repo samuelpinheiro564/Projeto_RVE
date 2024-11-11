@@ -33,7 +33,7 @@ async function CreateUser(req, res) {
 }
 async function fetchUsuariosPorRVE(req, res) {
     try {
-        const id = req.params.id;
+        const {id} = req.params;
         const query = `
             SELECT 
                 rves.Id AS RVE_Id,
@@ -108,12 +108,25 @@ async function Login(req, res)  {
     }  
 }  
 
+
+async function UserName(req, res)  {  
+    try {  
+        const { nome } = req.params;  
+        const { rows } = await pool.query("SELECT * FROM Usuarios WHERE nome = $1", [nome]);  // Corrigido para Usuarios  
+        res.json(rows);  
+    } catch (error) {  
+        console.error(error);  
+        res.status(500).json({ error: "Internal Server Error" });  
+    }  
+}  
+
 module.exports = {  
     DeleteUser,  
     AtualizaUser,  
     CreateUser,  
     AllUsers,   
     Login,
-fetchUsuariosPorRVE
+fetchUsuariosPorRVE,
+    UserName
 
 }
