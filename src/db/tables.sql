@@ -59,8 +59,9 @@ CREATE TABLE CampoTexto (
  CampoTexto VARCHAR(255),
  hora TIME,
  data DATE,
- FOREIGN KEY (nifUsuario) REFERENCES Usuarios(Nif)
+ FOREIGN KEY (nifUsuario) REFERENCES Usuarios(Nif),
   IdRVE INT,
+    FOREIGN KEY (IdRVE) REFERENCES rves(Id)
  ); -- Referência à tabela Usuarios);  
 
 
