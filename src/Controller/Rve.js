@@ -11,8 +11,8 @@ async function GetAllRves(req, res) {
 
 async function GetBYIDRVE(req, res) {
     try {
-        const id = req.params;
-        const result = await pool.query('SELECT * FROM RVES WHERE id = $1', [id]);
+        const {id} = req.params;
+        const result = await pool.query('SELECT * FROM rves WHERE id = $1', [id]);
 
         res.json(result.rows);
     } catch (err) {
@@ -34,7 +34,7 @@ async function CreateRve(req, res) {
 }
 
 async function EditRve(req, res) {
-    const Id = parseInt(req.params.Id);
+    const {Id} = parseInt(req.params.Id);
     const { Autor, Estudante, Curso, Turma, Data, Hora, Motivo, OrientacoesEstudante, DescricaoOcorrido, DocentesEnvolvidos, Assinaturas, Elogios, Dificuldades, AssinaturasBoolean, Presenca } = req.body;
 
     const response = await pool.query(
@@ -45,7 +45,7 @@ async function EditRve(req, res) {
 }
 
 async function deleteRve(req, res) {
-    const Id = parseInt(req.params.Id);
+    const { Id} = parseInt(req.params.Id);
     await pool.query("DELETE FROM RVES where Id = $1", [
         Id
     ]);
