@@ -26,9 +26,9 @@ async function getCampostextoRve(req, res) {
     res.json(response.rows);
 }
 
-async function getCampoTextoById(req, res) {
-    const id = parseInt(req.params.id);
-    const response = await pool.query("SELECT * FROM CampoTexto WHERE Id = $1", [id]);
+async function getCampoTextoByRve(req, res) {
+    const {idrve} = req.params
+    const response = await pool.query("SELECT * FROM CampoTexto WHERE Id = $1", [idrve]);
     res.json(response.rows);
 }
 
@@ -54,7 +54,7 @@ async function deleteCampoTexto(req, res) {
 module.exports = {
     CreateCampoTexto,
     GetAllCampoTexto,
-    getCampoTextoById,
+    getCampoTextoByRve,
     updateCampoTexto,
     deleteCampoTexto,
     getCampostextoRve
