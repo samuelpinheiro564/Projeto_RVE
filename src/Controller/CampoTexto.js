@@ -27,8 +27,8 @@ async function getCampostextoRve(req, res) {
 }
 
 async function getCampoTextoByRve(req, res) {
-    const {idrve} = req.params
-    const response = await pool.query("SELECT * FROM CampoTexto WHERE Id = $1", [idrve]);
+    const {IdRVE} = req.params
+    const response = await pool.query("SELECT * FROM CampoTexto WHERE IdRVE = $1", [IdRVE]);
     res.json(response.rows);
 }
 
