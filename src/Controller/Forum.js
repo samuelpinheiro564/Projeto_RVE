@@ -13,9 +13,7 @@ async function CreateRve(req, res) {
     }
 }
 
-async function getAllRveByIdRve(req, res) {
-
-    
+async function getAllRveByNif(req, res) {
     const {usuario_nif} = req.params;
     const response = await pool.query("SELECT * FROM rve_usuarios WHERE usuario_nif = $1", [usuario_nif]);
     res.json(response.rows);
@@ -23,5 +21,5 @@ async function getAllRveByIdRve(req, res) {
 
 module.exports = {
 CreateRve,
- getAllRveByIdRve
+getAllRveByNif
 };

@@ -1,11 +1,11 @@
 const pool = require('../config/dbConfig');
 
 async function CreateCampoTexto(req, res) {
-    const { id,nifusuario,campotexto } = req.body;
+    const { id,IdRVE,data,hora,nifUsuario,campotexto } = req.body;
     try {
         const result = await pool.query(
-            'INSERT INTO CampoTexto (id,,campotexto) VALUES ($1, $2,$3) RETURNING *',
-            [id,nifusuario,campotexto]
+            'INSERT INTO CampoTexto (id,IdRVE,data,hora,nifUsuario,campotexto) VALUES ($1, $2,$3,$4,$5,$6) RETURNING *',
+            [id,IdRVE,data,hora,nifUsuario,campotexto]
         );
         res.json(result.rows[0]);
     } catch (err) {
@@ -26,9 +26,9 @@ async function getCampostextoRve(req, res) {
     res.json(response.rows);
 }
 
-async function getCampoTextoById(req, res) {
-    const id = parseInt(req.params.id);
-    const response = await pool.query("SELECT * FROM CampoTexto WHERE Id = $1", [id]);
+async function getCampoTextoByRve(req, res) {
+    const {idrve} = req.params
+    const response = await pool.query("SELECT * FROM CampoTexto WHERE Id = $1", [idrve]);
     res.json(response.rows);
 }
 
@@ -54,7 +54,7 @@ async function deleteCampoTexto(req, res) {
 module.exports = {
     CreateCampoTexto,
     GetAllCampoTexto,
-    getCampoTextoById,
+    getCampoTextoByRve,
     updateCampoTexto,
     deleteCampoTexto,
     getCampostextoRve

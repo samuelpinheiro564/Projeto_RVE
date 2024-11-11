@@ -35,19 +35,17 @@ CREATE TABLE rves(
  Hora TIME,  
  Motivo VARCHAR(255),  
  OrientacoesEstudante TEXT,  
- DescricaoOcorrido TEXT,  
- DocentesEnvolvidos TEXT[],-- Array de texto para docentes envolvidos Assinaturas TEXT[], -- Array de texto para assinaturas Elogios TEXT,  
- Dificuldades TEXT,  
- nifDocentes INT,
- FOREIGN KEY (nifDocentes) REFERENCES Usuarios(Nif) ON DELETE CASCADE,  -- Referência à tabela Usuarios);
- assinaturas BOOLEAN[],
+ DescricaoOcorrido TEXT,  -- Array de texto para docentes envolvidos Assinaturas TEXT[], -- Array de texto para assinaturas Elogios TEXT,  
+ Dificuldades TEXT,   -- Referência à tabela Usuarios);
  Presenca TEXT
  );
 
  CREATE TABLE rve_usuarios(
+    id SERIAL PRIMARY KEY,
     id_rve INT,
     usuario_nif INT,
-PRIMARY KEY (id_rve, usuario_nif)
+    FOREIGN KEY (id_rve) REFERENCES rves(Id) ON DELETE CASCADE,
+    FOREIGN KEY (usuario_nif) REFERENCES Usuarios(Nif) ON DELETE CASCADE
  );
 
 
@@ -59,7 +57,7 @@ CREATE TABLE CampoTexto (
  data DATE,
  FOREIGN KEY (nifUsuario) REFERENCES Usuarios(Nif),
   IdRVE INT,
-  FOREIGN KEY (IdRVE) REFERENCES rves(Id)
+    FOREIGN KEY (IdRVE) REFERENCES rves(Id)
  ); -- Referência à tabela Usuarios);  
 
 

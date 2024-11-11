@@ -11,9 +11,8 @@ async function GetAllRves(req, res) {
 
 async function GetBYIDRVE(req, res) {
     try {
-        const {id} = req.params;
-        const result = await pool.query('SELECT * FROM rves WHERE id = $1', [id]);
-
+         const {id} = req.params;
+         const result = await pool.query('SELECT * FROM RVES WHERE id = $1', [id]);
         res.json(result.rows);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -21,11 +20,11 @@ async function GetBYIDRVE(req, res) {
 }
 
 async function CreateRve(req, res) {
-    const {id,nifautor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, docentesenvolvidos,nifDocentes, dificuldades,  presenca} = req.body;
+    const {id,nifautor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, dificuldades,  presenca} = req.body;
     try {
         const result = await pool.query(
-            'insert into rves (id,nifautor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, docentesenvolvidos,nifDocentes,dificuldades, presenca) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13,$14) returning *',
-            [id,nifautor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, docentesenvolvidos, nifDocentes, dificuldades, presenca]
+            'insert into rves (id,nifautor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido,dificuldades, presenca) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) returning *',
+            [id,nifautor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, dificuldades, presenca]
         );
         res.json(result.rows[0]);
     } catch (err) {
@@ -45,7 +44,7 @@ async function EditRve(req, res) {
 }
 
 async function deleteRve(req, res) {
-    const { Id} = parseInt(req.params.Id);
+    const {Id} = parseInt(req.params);
     await pool.query("DELETE FROM RVES where Id = $1", [
         Id
     ]);

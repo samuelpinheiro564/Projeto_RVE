@@ -33,7 +33,7 @@ async function CreateUser(req, res) {
 }
 async function fetchUsuariosPorRVE(req, res) {
     try {
-        const id = req.params.id;
+        const {id} = req.params;
         const query = `
             SELECT 
                 rves.Id AS RVE_Id,
