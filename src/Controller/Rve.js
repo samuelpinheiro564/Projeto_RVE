@@ -33,7 +33,7 @@ async function CreateRve(req, res) {
 }
 
 async function EditRve(req, res) {
-    const Id = parseInt(req.params.Id);
+    const {Id} = parseInt(req.params.Id);
     const { Autor, Estudante, Curso, Turma, Data, Hora, Motivo, OrientacoesEstudante, DescricaoOcorrido, DocentesEnvolvidos, Assinaturas, Elogios, Dificuldades, AssinaturasBoolean, Presenca } = req.body;
 
     const response = await pool.query(
