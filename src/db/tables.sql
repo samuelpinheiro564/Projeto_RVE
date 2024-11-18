@@ -50,7 +50,7 @@ CREATE TABLE rves(
 
 
 CREATE TABLE CampoTexto (  
- Id INT PRIMARY KEY,
+ Id SERIAL PRIMARY KEY,
  nifUsuario INT, -- Usar SERIAL para auto incremento NifTextoDocente INT, -- Presumindo que Nif seja um inteiro Texto TEXT,    
  CampoTexto VARCHAR(255),
  hora TIME,
@@ -59,7 +59,6 @@ CREATE TABLE CampoTexto (
   IdRVE INT,
     FOREIGN KEY (IdRVE) REFERENCES rves(Id)
  ); -- Referência à tabela Usuarios);  
-
 
 
 faça um select que pegue todos os comentarios de uma determinada rve 
