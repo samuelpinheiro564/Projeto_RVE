@@ -1,11 +1,11 @@
 const pool = require('../config/dbConfig');
 
 async function CreateCampoTexto(req, res) {
-    const { id,idrve,data,hora,nifusuario,campotexto } = req.body;
+    const { idrve,data,hora,nifusuario,campotexto } = req.body;
     try {
         const result = await pool.query(
-            'INSERT INTO CampoTexto (id,idrve,data,hora,nifusuario,campotexto) VALUES ($1, $2,$3,$4,$5,$6) RETURNING *',
-            [id,idrve,data,hora,nifusuario,campotexto]
+            'INSERT INTO CampoTexto (idrve,data,hora,nifusuario,campotexto) VALUES ($1, $2,$3,$4,$5) RETURNING *',
+            [idrve,data,hora,nifusuario,campotexto]
         );
         res.json(result.rows[0]);
     } catch (err) {
@@ -19,11 +19,6 @@ async function GetAllCampoTexto(req, res) {
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
-}
-async function getCampostextoRve(req, res) {
-    const idrve = parseInt(req.params);
-    const response = await pool.query("SELECT ct.Id, ct.nifUsuario,ct.CampoTexto FROM  Forum f JOIN CampoTexto ct ON f.IdCampoTexto = ct.Id WHERE  f.IdRVE = $1;", [idrve]);
-    res.json(response.rows);
 }
 
 async function getCampoTextoByRve(req, res) {
@@ -59,5 +54,4 @@ module.exports = {
     getCampoTextoByRve,
     updateCampoTexto,
     deleteCampoTexto,
-    getCampostextoRve
 };
