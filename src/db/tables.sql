@@ -53,6 +53,7 @@ CREATE TABLE CampoTexto (
  Id SERIAL PRIMARY KEY,
  nifUsuario INT, -- Usar SERIAL para auto incremento NifTextoDocente INT, -- Presumindo que Nif seja um inteiro Texto TEXT,    
  CampoTexto VARCHAR(255),
+ nomeUsuario VARCHAR(255),
  hora TIME,
  data DATE,
  FOREIGN KEY (nifUsuario) REFERENCES Usuarios(Nif),
