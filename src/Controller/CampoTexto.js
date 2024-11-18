@@ -22,11 +22,16 @@ async function GetAllCampoTexto(req, res) {
 }
 
 async function getCampoTextoByRve(req, res) {
-
-    const {idrve} = req.params
-    const response = await pool.query("SELECT * FROM CampoTexto WHERE idrve = $1", [idrve]);
-
-    res.json(response.rows);
+        try{
+            const {idrve} = req.params
+            const response = await pool.query("SELECT * FROM CampoTexto WHERE idrve = $1", [idrve]);
+            res.json(response.rows);
+        }catch(err){
+            res.status(500).json({ error: err.message });
+            if(err.message == "Cannot read property 'rows' of undefined"){
+                res.status(404).json({ error: "CampoTexto não encontrado" });
+            }
+        }
 }
 
 async function updateCampoTexto(req, res) {
