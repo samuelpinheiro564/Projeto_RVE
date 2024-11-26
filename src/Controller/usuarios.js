@@ -22,14 +22,19 @@ async function CreateUser(req, res) {
 
     try {  
         await pool.query(  
-            "INSERT INTO Usuarios (Nif, Nome, Email, Senha, Telefone, Tipo) VALUES ($1, $2, $3, $4, $5, $6)",  
+            "INSERT INTO Usuarios (nif, nome, email, senha, telefone, tipo) VALUES ($1, $2, $3, $4, $5, $6)",  
             [nif, nome, email, senha, telefone, tipo]  
         );  
         res.json({ message: "Usuário criado" });  
     } catch (error) {  
+        if(nif ==nif ){
+            res.status(400).json({ error: "Usuário já cadastrado" });
+        }  
+        else{
         console.error('Erro ao criar usuário:', error);  
         res.status(500).json({ error: "Erro ao criar usuário" });  
-    }  
+        }
+}
 }
 async function fetchUsuariosPorRVE(req, res) {
     try {
