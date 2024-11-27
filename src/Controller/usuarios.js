@@ -104,8 +104,8 @@ async function DeleteUser(req, res) {
 
 async function Login(req, res)  {  
     try {  
-        const { nif } = req.params;  
-        const { rows } = await pool.query("SELECT * FROM Usuarios WHERE nif = $1", [nif]);  // Corrigido para Usuarios  
+        const { nif,senha } = req.params;  
+        const { rows } = await pool.query("SELECT * FROM Usuarios WHERE nif = $1 AND senha = $2", [nif,senha]);  // Corrigido para Usuarios  
         res.json(rows);  
     } catch (error) {  
         console.error(error);  
