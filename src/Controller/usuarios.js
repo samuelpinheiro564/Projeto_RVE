@@ -65,14 +65,14 @@ async function fetchUsuariosPorRVE(req, res) {
 
 async function AtualizaUser(req, res) {
     const { nif } = req.params;
-    const { nome, email, senha, telefone, tipo } = req.body;
+    const {nome,email,senha,telefone,tipo} = req.body;
 
-    console.log('Dados recebidos:', { nif, nome, email, senha, telefone, tipo });
+    console.log('Dados recebidos:', {nif,nome,email,senha,telefone,tipo});
 
     try {
         await pool.query(
             "UPDATE Usuarios SET nome = $1, email = $2, senha = $3, telefone = $4, tipo = $5 WHERE nif = $6",
-            [nome, email, senha, telefone, tipo, nif]
+            [nome,email,senha,telefone,tipo,nif]
         );
         res.json({ message: "Usuário atualizado" });
     } catch (error) {
