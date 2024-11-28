@@ -117,9 +117,41 @@ async function deleteSaidaRecord(req, res) {
         res.status(500).json({ error: "Internal Server Error" });  
     }
 }
+async function MenorIdade(req, res) {
+    try {
+        const result = await pool.query("SELECT * FROM Saida WHERE maioridade = false");
+        res.status(200).json(result.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+async function postAssinaturaAnaq(req, res) {
+    try {
+        const {id} = req.params;
+        const [assinaturaAnaq] = req.body;
+        const result = await pool.query("UPDATE assinaturaAnaq SET assinaturaAnaq = $1 WHERE id = $2", [assinaturaAnaq, id]);
+        res.status(200).json(result.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
 
+async function postAssinaturaProf(req, res) {
+    try {
+        const {id} = req.params;
+        const [assinaturaProf] = req.body;
+        const result = await pool.query("UPDATE assinaturaProf SET assinaturaProf = $1 WHERE id = $2", [assinaturaProf, id]);
+    }catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }}
 module.exports = {  
-    createSaidaRecord,  
+    postAssinaturaProf,
+    postAssinaturaAnaq,
+    createSaidaRecord,
+    MenorIdade,  
     getAllSaidas,  
     getSaidaRecordById,  
     updateSaidaRecord,

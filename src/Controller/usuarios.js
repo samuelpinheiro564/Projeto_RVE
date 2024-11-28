@@ -2,7 +2,8 @@ const pool = require('../config/dbConfig');
 
 async function AllUsers(req, res)  {  // Corrigido para AllUsers  
     try {  
-        const { rows } = await pool.query("SELECT * FROM Usuarios");  
+        const { nif } = req.params;
+        const { rows } = await pool.query("SELECT * FROM Usuarios  WHERE nif != $1", [nif]);  // Corrigido para Usuarios
         res.json(rows);  
     }  
     catch (error) {  
