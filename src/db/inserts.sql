@@ -8,11 +8,11 @@ INSERT INTO Saida (id, NomeALuno, Curso, DataSaida, HoraSaida, Turma, AlunoRA, M
 
 
 INSERT INTO Usuarios (Nif, Nome, Email, Senha, Telefone, Tipo) VALUES 
-(123456789, 'Carlos Almeida', 'carlos@example.com', 'senha123', 987654321, 'Docente'),
-(987654321, 'Fernanda Lima', 'fernanda@example.com', 'senha456', 123456789, 'Aluno'),
-(567890123, 'Rafael Gomes', 'rafael@example.com', 'senha789', 234567890, 'Docente'),
-(234567890, 'Sofia Martins', 'sofia@example.com', 'senha101', 345678901, 'Aluno'),
-(345678901, 'Gustavo Ribeiro', 'gustavo@example.com', 'senha202', 456789012, 'Docente');
+(123456789, 'Carlos Almeida', 'carlos@example.com', 'senha123', 987654321, 'docente'),
+(987654321, 'Fernanda Lima', 'fernanda@example.com', 'senha456', 123456789, 'admin'),
+(567890123, 'Rafael Gomes', 'rafael@example.com', 'senha789', 234567890, 'docente'),
+(234567890, 'Sofia Martins', 'sofia@example.com', 'senha101', 345678901, 'admin'),
+(345678901, 'Gustavo Ribeiro', 'gustavo@example.com', 'senha202', 456789012, 'docente');
 
 
 -- Insert into RVES
