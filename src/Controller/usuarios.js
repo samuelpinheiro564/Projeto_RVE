@@ -15,13 +15,8 @@ async function CreateUser(req, res) {
     const { nif, nome, email, senha, telefone, tipo } = req.body;  
 
     // Validações  
-    if (telefone.length > 19) {  
-        return res.status(400).json({ error: "O telefone deve ter no máximo 19 caracteres." });  
-    }  
-
-
     try {  
-        await pool.query(  
+       await pool.query(  
             "INSERT INTO Usuarios (nif, nome, email, senha, telefone, tipo) VALUES ($1, $2, $3, $4, $5, $6)",  
             [nif, nome, email, senha, telefone, tipo]  
         );  
@@ -65,14 +60,14 @@ async function fetchUsuariosPorRVE(req, res) {
 
 async function AtualizaUser(req, res) {
     const { nif } = req.params;
-    const {nome,email,senha,telefone,tipo} = req.body;
+    const { nome, email, senha, telefone, tipo } = req.body;
 
-    console.log('Dados recebidos:', {nif,nome,email,senha,telefone,tipo});
+    console.log('Dados recebidos:', { nif, nome, email, senha, telefone, tipo });
 
     try {
         await pool.query(
             "UPDATE Usuarios SET nome = $1, email = $2, senha = $3, telefone = $4, tipo = $5 WHERE nif = $6",
-            [nome,email,senha,telefone,tipo,nif]
+            [nome, email, senha, telefone, tipo, nif]
         );
         res.json({ message: "Usuário atualizado" });
     } catch (error) {
@@ -102,33 +97,23 @@ async function DeleteUser(req, res) {
 
 
 
-async function Login(req, res) {
+const Login = async (req, res) => {
     try {
-        const { nif, senha } = req.body; // Use req.body para dados enviados em uma requisição POST
-        if (!nif || !senha) {
-            return res.status(400) // Validação de entrada
+      const { nif, senha } = req.params; // Agora os parâmetros vêm do corpo da requisição
+      const { rows } = await pool.query("SELECT * FROM Usuarios WHERE nif = $1 AND senha = $2", [nif, senha]);
+      if (rows.length === 0) {
+        return res.status(400).json({ status:404, error: "Usuário não encontrado" });
         }
-
-        const { rows } = await pool.query(
-            "SELECT * FROM Usuarios WHERE nif = $1 AND senha = $2",
-            [nif, senha]
-        );
-
-        if (rows.length === 0) {
-            return res.status(401) // NIF ou senha incorretos
-        }
-
-        // Retorna os dados do usuário para um login bem-sucedido
-        res.status(200).json({
-            message: "Login bem-sucedido",
-            user: rows[0],
-        });
+    
+        res.status(200).json(rows); // Retorna os dados do usuário se encontrar
+  
     } catch (error) {
-        console.error("Erro ao tentar autenticar:", error);
-        res.status(500).json({ error: "Erro interno no servidor" }); // Erro genérico para falhas no banco
+       
+      console.error(error);
+      res.status(500).json({ status:500, error: "Erro interno do servidor" });
     }
-}
-
+  };
+  
 
 async function UserName(req, res)  {  
     try {  

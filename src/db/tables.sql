@@ -1,17 +1,18 @@
 
 CREATE TABLE Saida(
-id SERIAL PRIMARY KEY ,
-NomeALuno VARCHAR(255),
-Curso VARCHAR(255),
-DataSaida DATE,
-HoraSaida TIME,
-Turma VARCHAR(255),
-AlunoRA INT,
-MaiorIdade BOOLEAN,
-justificativa VARCHAR(255),
-AssinaturaAnaq VARCHAR(255),
-AssinaturaProf VARCHAR(255)
+    id SERIAL PRIMARY KEY,
+    NomeALuno VARCHAR(255),
+    Curso VARCHAR(255),
+    DataSaida DATE,
+    HoraSaida TIME,
+    Turma VARCHAR(255),
+    AlunoRA INT,
+    MaiorIdade BOOLEAN,
+    justificativa VARCHAR(255),
+    AssinaturaAnaq TEXT,  -- Alterado para TEXT, pode ser base64
+    AssinaturaProf TEXT[]   -- Alterado para TEXT, pode ser base64
 );
+
 
 CREATE TABLE Usuarios(
     Nif INT PRIMARY KEY ,
@@ -25,20 +26,22 @@ CREATE TABLE Usuarios(
 
 
 CREATE TABLE rves(
- Id INT PRIMARY KEY,  
- NifAutor INT,
- FOREIGN KEY (NifAutor) REFERENCES Usuarios(nif) ON DELETE CASCADE,
- Estudante VARCHAR(255),  
- Curso VARCHAR(255),  
- Turma VARCHAR(255),  
- Data DATE,  
- Hora TIME,  
- Motivo VARCHAR(255),  
- OrientacoesEstudante TEXT,  
- DescricaoOcorrido TEXT,  -- Array de texto para docentes envolvidos Assinaturas TEXT[], -- Array de texto para assinaturas Elogios TEXT,  
- Dificuldades TEXT,   -- Referência à tabela Usuarios);
- Presenca TEXT
- );
+    Id INT PRIMARY KEY,
+    NifAutor INT,
+    FOREIGN KEY (NifAutor) REFERENCES Usuarios(nif) ON DELETE CASCADE,
+    Estudante VARCHAR(255),
+    Curso VARCHAR(255),
+    Turma VARCHAR(255),
+    Data DATE,
+    Hora TIME,
+    Motivo VARCHAR(255),
+    OrientacoesEstudante TEXT,
+    DescricaoOcorrido TEXT,  
+    Assinaturas TEXT[],  -- Assinaturas armazenadas como array de texto (base64)
+    Elogios TEXT,
+    Dificuldades TEXT,
+    Presenca TEXT
+);
 
  CREATE TABLE rve_usuarios(
     id SERIAL PRIMARY KEY,

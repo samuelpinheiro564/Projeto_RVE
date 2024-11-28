@@ -1,10 +1,10 @@
 const pool = require('../config/dbConfig');
 
 async function CreateCampoTexto(req, res) {
-    const { idrve,data,hora,nomeusuario,nifusuario,campotexto } = req.body;
+    const {idrve,data,hora,nomeusuario,nifusuario,campotexto} = req.body;
     try {
         const result = await pool.query(
-            'INSERT INTO CampoTexto (idrve,data,hora,nomeusuario,nifusuario,campotexto) VALUES ($1, $2,$3,$4,$5,$6) RETURNING *',
+            'INSERT INTO CampoTexto (idrve,data,hora,nomeusuario,nifusuario,campotexto) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *',
             [idrve,data,hora,nomeusuario,nifusuario,campotexto]
         );
         res.json(result.rows[0]);
