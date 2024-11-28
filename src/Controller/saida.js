@@ -59,13 +59,24 @@ async function createSaidaRecord(req, res) {
 
 async function getAllSaidas(req, res) {  
     try {  
-        const result = await pool.query("SELECT * FROM Saida GROUP BY datasaida, GROUP BY horasaida DESC");  
+        const result = await pool.query(
+            "SELECT * FROM Saida ORDER BY datasaida DESC, horasaida DESC");  
         res.status(200).json(result.rows);  
     } catch (error) {  
         console.error(error);  
         res.status(500).json({ error: "Internal Server Error" });  
     }  
 }  
+
+async function getUltimaSaida (req,res) {
+    try {
+        const result = await pool.query("SELECT * FROM Saida ORDER BY datasaida DESC, horasaida DESC LIMIT 1");
+        res.status(200).json(result.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
 
 async function getSaidaRecordById(req, res) {  
     const { id } = req.params;  
@@ -132,5 +143,6 @@ module.exports = {
     getAllSaidas,  
     getSaidaRecordById,  
     updateSaidaRecord  ,
-    deleteSaidaRecord
+    deleteSaidaRecord,
+    getUltimaSaida
 };

@@ -102,16 +102,32 @@ async function DeleteUser(req, res) {
 
 
 
-async function Login(req, res)  {  
-    try {  
-        const { nif,senha } = req.params;  
-        const { rows } = await pool.query("SELECT * FROM Usuarios WHERE nif = $1 AND senha = $2", [nif,senha]);  // Corrigido para Usuarios  
-        res.json(rows);  
-    } catch (error) {  
-        console.error(error);  
-        res.status(500).json({ error: "Internal Server Error" });  
-    }  
-}  
+async function Login(req, res) {
+    try {
+        const { nif, senha } = req.body; // Use req.body para dados enviados em uma requisição POST
+        if (!nif || !senha) {
+            return res.status(400) // Validação de entrada
+        }
+
+        const { rows } = await pool.query(
+            "SELECT * FROM Usuarios WHERE nif = $1 AND senha = $2",
+            [nif, senha]
+        );
+
+        if (rows.length === 0) {
+            return res.status(401) // NIF ou senha incorretos
+        }
+
+        // Retorna os dados do usuário para um login bem-sucedido
+        res.status(200).json({
+            message: "Login bem-sucedido",
+            user: rows[0],
+        });
+    } catch (error) {
+        console.error("Erro ao tentar autenticar:", error);
+        res.status(500).json({ error: "Erro interno no servidor" }); // Erro genérico para falhas no banco
+    }
+}
 
 
 async function UserName(req, res)  {  
