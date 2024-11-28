@@ -20,12 +20,16 @@ async function GetBYIDRVE(req, res) {
 }
 
 async function CreateRve(req, res) {
-    const {nifAutor, estudante, curso, turma, data, hora, motivo, orientacoesEstudante, descricaoOcorrido, dificuldades, presenca, docentesEnvolvidos, assinaturas} = req.body;
+    const {id,nifAutor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, 
+        descricaoocorrido, dificuldades, presenca,  assinaturas} = req.body;
     try {
         const result = await pool.query(
-            'INSERT INTO rves (nifautor, estudante, curso, turma, data, hora, motivo, orientacoesEstudante, descricaoOcorrido, dificuldades, presenca, docentesEnvolvidos, assinaturas) ' +
-            'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *',
-            [nifAutor, estudante, curso, turma, data, hora, motivo, orientacoesEstudante, descricaoOcorrido, dificuldades, presenca, docentesEnvolvidos, assinaturas]
+            'INSERT INTO rves (id,nifautor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, dificuldades, presenca, assinaturas) ' +
+            'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12,$13) RETURNING *',
+            [id,nifAutor, estudante, curso, turma, 
+                data, hora, motivo, orientacoesestudante,
+                 descricaoocorrido, dificuldades, presenca,
+                   assinaturas]
         );
         res.json(result.rows[0]);
     } catch (err) {
