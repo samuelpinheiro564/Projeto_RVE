@@ -120,7 +120,7 @@ async function postAssinaturaAnaq(req, res) {
     try {
         const {id} = req.params;
         const [assinaturaanaq] = req.body;
-        const result = await pool.query("UPDATE assinaturaAnaq SET assinaturaAnaq = $1 WHERE id = $2", [assinaturaanaq, id]);
+        const result = await pool.query("UPDATE Saida SET assinaturaanaq = $1 WHERE id = $2", [assinaturaanaq, id]);
         res.status(200).json(result.rows);
     } catch (error) {
         console.error(error);
@@ -137,17 +137,6 @@ async function postAssinaturaProf(req, res) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
     }}
-
-    async function AssinadasProf(req, res) {
-        try {
-            const result = await pool.query("SELECT * FROM Saida WHERE assinaturaProf != NULL");
-            res.status(200).json(result.rows);
-        }
-        catch (error) {
-            console.error(error);
-            res.status(500).json({ error: "Internal Server Error" });
-        }
-    }
 module.exports = {  
     postAssinaturaProf,
     postAssinaturaAnaq,

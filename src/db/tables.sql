@@ -40,7 +40,8 @@ CREATE TABLE rves(
     Assinaturas TEXT[],  -- Assinaturas armazenadas como array de texto (base64)
     Elogios TEXT,
     Dificuldades TEXT,
-    Presenca TEXT
+    Presenca TEXT,
+    numberusers INT
 );
 
  CREATE TABLE rve_usuarios(

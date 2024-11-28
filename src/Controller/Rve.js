@@ -20,16 +20,16 @@ async function GetBYIDRVE(req, res) {
 }
 
 async function CreateRve(req, res) {
-    const {id,nifAutor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, 
-        descricaoocorrido, dificuldades, presenca,  assinaturas} = req.body;
+    const {id,nifautor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, 
+        descricaoocorrido, dificuldades, presenca,elogios, assinaturas,numberusers} = req.body;
     try {
         const result = await pool.query(
-            'INSERT INTO rves (id,nifautor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, dificuldades, presenca, assinaturas) ' +
-            'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12,$13) RETURNING *',
-            [id,nifAutor, estudante, curso, turma, 
+            'INSERT INTO rves (id,nifautor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido, dificuldades, presenca,elogios, assinaturas,numberusers) ' +
+            'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12,$13,$14,$15) RETURNING *',
+            [id,nifautor, estudante, curso, turma, 
                 data, hora, motivo, orientacoesestudante,
-                 descricaoocorrido, dificuldades, presenca,
-                   assinaturas]
+                 descricaoocorrido, dificuldades, presenca,elogios,
+                   assinaturas,numberusers]
         );
         res.json(result.rows[0]);
     } catch (err) {
@@ -39,20 +39,30 @@ async function CreateRve(req, res) {
 
 async function EditRve(req, res) {
     const { id } = req.params;  // Corrigido para pegar o ID corretamente
-    const { nifAutor, estudante, curso, turma, data, hora, motivo, orientacoesEstudante, descricaoOcorrido, docentesEnvolvidos, assinaturas, dificuldades, presenca } = req.body;
+    const { nifautor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido,
+        assinaturas, dificuldades, presenca, elogios ,numberusers } = req.body;
 
     try {
         const response = await pool.query(
             "UPDATE rves SET nifautor = $1, estudante = $2, curso = $3, turma = $4, data = $5, hora = $6, motivo = $7, " +
-            "orientacoesEstudante = $8, descricaoOcorrido = $9, docentesEnvolvidos = $10, assinaturas = $11, " +
-            "dificuldades = $12, presenca = $13 WHERE id = $14",
-            [nifAutor, estudante, curso, turma, data, hora, motivo, orientacoesEstudante, descricaoOcorrido, docentesEnvolvidos, assinaturas, dificuldades, presenca, id]
+            "orientacoesestudante = $8, descricaoocorrido = $9,   assinaturas = $11, " +
+            "dificuldades = $12, presenca = $13 , elogios = $14 , numberusers = $15 WHERE id = $16",
+            [nifautor, estudante, curso, turma, data, hora, motivo, orientacoesestudante, descricaoocorrido,
+                 assinaturas, dificuldades, presenca, elogios ,numberusers,  id]
         );
         res.json("RVE Updated Successfully");
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 }
+async function rveCompleta(req, res) {
+    try {
+        const {id} = req.params;
+        const result = await pool.query('SELECT * FROM rves WHERE numberusers = array_length(assinaturas, 1);');
+        res.json(result.rows);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }}
 
 async function deleteRve(req, res) {
     const { id } = req.params;  // Corrigido para pegar o ID corretamente
@@ -69,5 +79,6 @@ module.exports = {
     CreateRve,
     EditRve,
     deleteRve,
-    GetBYIDRVE
+    GetBYIDRVE,
+    rveCompleta
 };
