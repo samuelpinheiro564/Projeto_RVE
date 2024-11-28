@@ -57,9 +57,9 @@ async function createSaidaRecord(req, res) {
 }
 
 
-async function getSaidaRecords(req, res) {  
+async function getAllSaidas(req, res) {  
     try {  
-        const result = await pool.query("SELECT * FROM Saida");  
+        const result = await pool.query("SELECT * FROM Saida GROUP BY datasaida, GROUP BY horasaida DESC");  
         res.status(200).json(result.rows);  
     } catch (error) {  
         console.error(error);  
@@ -129,7 +129,7 @@ async function deleteSaidaRecord(req, res) {
 
 module.exports = {  
     createSaidaRecord,  
-    getSaidaRecords,  
+    getAllSaidas,  
     getSaidaRecordById,  
     updateSaidaRecord  ,
     deleteSaidaRecord
