@@ -1,6 +1,6 @@
 const pool = require('../config/dbConfig');  
 
-async function AllUsers(req, res)  {  // Corrigido para AllUsers  
+async function AllUsersNif(req, res)  {  // Corrigido para AllUsers  
     try {  
         const { nif } = req.params;
         const { rows } = await pool.query("SELECT * FROM Usuarios  WHERE nif != $1", [nif]);  // Corrigido para Usuarios
@@ -11,6 +11,17 @@ async function AllUsers(req, res)  {  // Corrigido para AllUsers
         res.status(500).json({ error: "Internal Server Error" });  
     }  
 };  
+ 
+async function AllUsers(req, res)  {  // Corrigido para AllUsers
+    try {  
+        const { rows } = await pool.query("SELECT * FROM Usuarios");  // Corrigido para Usuarios
+        res.json(rows);  
+    }  
+    catch (error) {  
+        console.error(error);  
+        res.status(500).json({ error: "Internal Server Error" });  
+    }  
+}
 
 async function CreateUser(req, res) {  
     const { nif, nome, email, senha, telefone, tipo } = req.body;  
@@ -133,6 +144,7 @@ module.exports = {
     CreateUser,  
     AllUsers,   
     Login,
+    AllUsersNif,
 fetchUsuariosPorRVE,
     UserName
 

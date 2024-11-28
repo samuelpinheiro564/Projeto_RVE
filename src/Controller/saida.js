@@ -10,17 +10,12 @@ async function createSaidaRecord(req, res) {
         alunora,  
         maioridade,  
         justificativa,
-        assinaturaAnaq,  
-        assinaturaProf  
+        assinaturaanaq,  
+        assinaturaprof  
     } = req.body;  
 
     if (!datasaida) {  
         return res.status(400).json({ error: "Data de saída não pode estar vazia." });  
-    }  
-
-    const datePattern = /^\d{4}-\d{2}-\d{2}$/; 
-    if (!datePattern.test(datasaida)) {  
-        return res.status(400).json({ error: "Data de saída deve estar no formato YYYY-MM-DD." });  
     }  
 
     const isMaioridade = typeof maioridade === 'string' ? maioridade === 'true' : maioridade;  
@@ -29,8 +24,8 @@ async function createSaidaRecord(req, res) {
     
     try {  
         const result = await pool.query(  
-            `INSERT INTO Saida (nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, justificativa, assinaturaAnaq, assinaturaProf) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,  
-            [nomealuno, curso, datasaida, horasaida, turma, alunora, isMaioridade, justificativa, assinaturaAnaq, assinaturaProf]  
+            `INSERT INTO Saida (nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, justificativa, assinaturaanaq, assinaturaprof) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,  
+            [nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, justificativa, assinaturaanaq, assinaturaprof]  
         );  
         res.status(201).json(result.rows[0]);  
     } catch (error) {  
@@ -42,7 +37,7 @@ async function createSaidaRecord(req, res) {
 async function getAllSaidas(req, res) {  
     try {  
         const result = await pool.query(
-            "SELECT * FROM Saida ORDER BY datasaida DESC, horasaida DESC");  
+            "SELECT * FROM Saida");  
         res.status(200).json(result.rows);  
     } catch (error) {  
         console.error(error);  
@@ -118,19 +113,14 @@ async function deleteSaidaRecord(req, res) {
     }
 }
 async function MenorIdade(req, res) {
-    try {
-        const result = await pool.query("SELECT * FROM Saida WHERE maioridade = false");
+        const result = await pool.query("SELECT * FROM Saida WHERE maioridade = false AND (assinaturaprof IS NULL OR assinaturaanaq IS NULL)");
         res.status(200).json(result.rows);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Internal Server Error" });
-    }
 }
 async function postAssinaturaAnaq(req, res) {
     try {
         const {id} = req.params;
-        const [assinaturaAnaq] = req.body;
-        const result = await pool.query("UPDATE assinaturaAnaq SET assinaturaAnaq = $1 WHERE id = $2", [assinaturaAnaq, id]);
+        const [assinaturaanaq] = req.body;
+        const result = await pool.query("UPDATE assinaturaAnaq SET assinaturaAnaq = $1 WHERE id = $2", [assinaturaanaq, id]);
         res.status(200).json(result.rows);
     } catch (error) {
         console.error(error);
@@ -147,6 +137,17 @@ async function postAssinaturaProf(req, res) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
     }}
+
+    async function AssinadasProf(req, res) {
+        try {
+            const result = await pool.query("SELECT * FROM Saida WHERE assinaturaProf != NULL");
+            res.status(200).json(result.rows);
+        }
+        catch (error) {
+            console.error(error);
+            res.status(500).json({ error: "Internal Server Error" });
+        }
+    }
 module.exports = {  
     postAssinaturaProf,
     postAssinaturaAnaq,
