@@ -23,7 +23,12 @@ CREATE TABLE Usuarios(
     Tipo VARCHAR(255) NOT NULL
 );
 
-
+CREATE TABLE refresh_tokens (
+    id SERIAL PRIMARY KEY,
+    token TEXT NOT NULL,
+    user_nif INTEGER NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 CREATE TABLE rves(
     Id INT PRIMARY KEY,

@@ -1,12 +1,13 @@
 
 require('dotenv').config();
 const express = require('express');
-const CampoTextoRoutes = require("../src/routes/campoTextoRoutes")
-const ForumRoutes = require("../src/routes/forumRoutes")
-const SaidaRoutes = require("../src/routes/saidaRoutes")
+const CampoTextoRoutes = require("../src/routes/campoTexto.routes")
+const ForumRoutes = require("../src/routes/forum.routes")
+const SaidaRoutes = require("../src/routes/saida.routes")
 const usuarios = require("../src/routes/usuarios.routes")
+const Token = require("../src/routes/Token.routes")
 
-const RveRoutes = require("../src/routes/rveRoutes")
+const RveRoutes = require("./routes/rve.routes")
 const cors = require('cors');  
  
 const app = express();
@@ -21,6 +22,7 @@ app.use(ForumRoutes);
 app.use(SaidaRoutes);
 app.use(usuarios);
 app.use(RveRoutes);
+app.use(Token);
 
 
 
