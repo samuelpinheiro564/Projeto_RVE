@@ -118,8 +118,8 @@ async function MenorIdade(req, res) {
 }
 async function postAssinaturaAnaq(req, res) {
     try {
-        const {id} = req.params;
-        const [assinaturaanaq] = req.body;
+        const { id } = req.params;
+        const { assinaturaanaq } = req.body; // Desestruture diretamente do objeto
         const result = await pool.query("UPDATE Saida SET assinaturaanaq = $1 WHERE id = $2", [assinaturaanaq, id]);
         res.status(200).json(result.rows);
     } catch (error) {
@@ -127,6 +127,7 @@ async function postAssinaturaAnaq(req, res) {
         res.status(500).json({ error: "Internal Server Error" });
     }
 }
+
 
 async function postAssinaturaProf(req, res) {
     try {

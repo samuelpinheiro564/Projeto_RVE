@@ -9,7 +9,7 @@ router.get("/saida/ultimasaida", SaidaController.getUltimaSaida);
 router.get("/saida/:id", SaidaController.getSaidaRecordById);
 router.put("/saida/:id", SaidaController.updateSaidaRecord);
 router.get("/saida/menor/idade", SaidaController.MenorIdade);
-router.put("/saida/assinaturaanaq/:id", SaidaController.postAssinaturaAnaq);
+router.put("/saida/assinatura/anaq/:id", SaidaController.postAssinaturaAnaq);
 router.put("/saida/assinaturaprof/:id", SaidaController.postAssinaturaProf);
 router.delete("/saida/:id", SaidaController.deleteSaidaRecord);
 
