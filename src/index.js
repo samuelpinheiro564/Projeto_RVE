@@ -5,7 +5,7 @@ const CampoTextoRoutes = require("../src/routes/campoTexto.routes")
 const ForumRoutes = require("../src/routes/forum.routes")
 const SaidaRoutes = require("../src/routes/saida.routes")
 const usuarios = require("../src/routes/usuarios.routes")
-const Token = require("../src/routes/Token.routes")
+
 
 const RveRoutes = require("./routes/rve.routes")
 const cors = require('cors');  
@@ -22,7 +22,7 @@ app.use(ForumRoutes);
 app.use(SaidaRoutes);
 app.use(usuarios);
 app.use(RveRoutes);
-app.use(Token);
+
 
 
 

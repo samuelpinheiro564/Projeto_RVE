@@ -77,8 +77,8 @@ async function updateSaidaRecord(req, res) {
         alunora,  
         maioridade,  
         justificativa,
-        assinaturaAnaq,  
-        assinaturaProf  
+        assinaturaanaq,  
+        assinaturaprof  
     } = req.body;  
 
     if (!datasaida) {  
@@ -92,8 +92,8 @@ async function updateSaidaRecord(req, res) {
 
     try {  
         await pool.query(  
-            "UPDATE Saida SET nomealuno = $1, curso = $2, datasaida = $3, horasaida = $4, turma = $5, alunora = $6, maioridade = $7, justificativa = $8, assinaturaAnaq = $9, assinaturaProf = $10 WHERE id = $11",  
-            [nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, justificativa, assinaturaAnaq, assinaturaProf, id]  
+            "UPDATE Saida SET nomealuno = $1, curso = $2, datasaida = $3, horasaida = $4, turma = $5, alunora = $6, maioridade = $7, justificativa = $8, assinaturaanaq = $9, assinaturaprof = $10 WHERE id = $11",  
+            [nomealuno, curso, datasaida, horasaida, turma, alunora, maioridade, justificativa, assinaturaanaq, assinaturaprof, id]  
         );  
         res.json({ message: "Saida atualizada" });  
     } catch (error) {  

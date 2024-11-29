@@ -58,7 +58,7 @@ async function EditRve(req, res) {
 async function rveCompleta(req, res) {
     try {
         const {id} = req.params;
-        const result = await pool.query('SELECT * FROM rves WHERE numberusers = array_length(assinaturas, 1);');
+        const result = await pool.query('SELECT * FROM rves WHERE numberusers = array_length(assinaturas, 1) ORDER BY data DESC, hora DESC');
         res.json(result.rows);
     } catch (err) {
         res.status(500).json({ error: err.message });
