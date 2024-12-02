@@ -69,8 +69,9 @@ async function getPrimeirasSaidas(req, res) {
 
 async function getUltimaSaida(req, res) {
     try {
-        const result = await pool.query("SELECT * FROM Saida ORDER BY datasaida DESC, horasaida DESC LIMIT 1");
+        const result = await pool.query("SELECT * FROM Saida WHERE nomealuno IS NOT NULL AND curso IS NOT NULL AND datasaida IS NOT NULL AND horasaida IS NOT NULL AND alunora IS NOT NULL AND justificativa IS NOT NULL AND maioridade IS NOT NULL AND assinaturaanaq IS NOT NULL AND assinaturaprof IS NOT NULL ORDER BY datasaida DESC, horasaida DESC LIMIT 1");
         res.status(200).json(result.rows);
+       
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
