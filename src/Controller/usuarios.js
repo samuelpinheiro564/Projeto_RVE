@@ -127,19 +127,31 @@ const Login = async (req, res) => {
   };
   
 
-async function UserName(req, res)  {  
-    try {  
-        const { nome } = req.params;  
-        const { rows } = await pool.query("SELECT * FROM Usuarios WHERE nome = $1", [nome]);  // Corrigido para Usuarios  
-        res.json(rows);  
-    } catch (error) {  
-        console.error(error);  
-        res.status(500).json({ error: "Internal Server Error" });  
-    }  
-}  
+async function UserName(req, res) {
+      const { nome } = req.params;
+      try {
+          const result = await pool.query('SELECT * FROM Usuarios WHERE nome ILIKE $1', [`%${nome}%`]);
+          res.json(result.rows);
+      } catch (error) {
+          console.error('Erro ao buscar usuários pelo nome:', error);
+          res.status(500).json({ error: 'Erro ao buscar usuários pelo nome.' });
+      }
+  };
+
+async function UserType (req, res)  {
+    const { tipo } = req.params;
+    try {
+        const result = await pool.query('SELECT * FROM Usuarios WHERE tipo ILIKE $1', [`%${tipo}%`]);
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Erro ao buscar usuários pelo tipo:', error);
+        res.status(500).json({ error: 'Erro ao buscar usuários pelo tipo.' });
+    }
+};
 
 module.exports = {  
     DeleteUser,  
+    UserType,
     AtualizaUser,  
     CreateUser,  
     AllUsers,   
@@ -147,5 +159,4 @@ module.exports = {
     AllUsersNif,
 fetchUsuariosPorRVE,
     UserName
-
 }

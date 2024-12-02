@@ -37,13 +37,35 @@ async function createSaidaRecord(req, res) {
 async function getAllSaidas(req, res) {  
     try {  
         const result = await pool.query(
-            "SELECT * FROM Saida");  
+            "SELECT * FROM Saida ");  
         res.status(200).json(result.rows);  
     } catch (error) {  
         console.error(error);  
         res.status(500).json({ error: "Internal Server Error" });  
     }  
 }  
+
+async function getUltimasSaidas(req, res) {
+    try {
+        const result = await pool.query("SELECT * FROM Saida ORDER BY datasaida DESC, horasaida DESC");
+        res.status(200).json(result.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+
+async function getPrimeirasSaidas(req, res) {
+    try {
+        const result = await pool.query("SELECT * FROM Saida ORDER BY datasaida ASC, horasaida ASC");
+        res.status(200).json(result.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+
+
 
 async function getUltimaSaida(req, res) {
     try {
@@ -65,6 +87,10 @@ async function getSaidaRecordById(req, res) {
         res.status(500).json({ error: "Internal Server Error" });  
     }  
 }  
+
+
+    
+
 
 async function updateSaidaRecord(req, res) {  
     const { id } = req.params;  
@@ -138,14 +164,17 @@ async function postAssinaturaProf(req, res) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
     }}
+
 module.exports = {  
     postAssinaturaProf,
     postAssinaturaAnaq,
     createSaidaRecord,
-    MenorIdade,  
+    MenorIdade, 
+    getUltimasSaidas, 
     getAllSaidas,  
     getSaidaRecordById,  
     updateSaidaRecord,
     deleteSaidaRecord,
+    getPrimeirasSaidas,
     getUltimaSaida
-};
+}

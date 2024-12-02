@@ -10,5 +10,6 @@ usuarios.get("/usuarios/:nif/:senha", UsuariosController.Login);
 usuarios.put("/usuarios/:nif", UsuariosController.AtualizaUser);  
 usuarios.delete("/usuarios/:nif", UsuariosController.DeleteUser);  
 usuarios.get("/usuariosRve/:idrve", UsuariosController.fetchUsuariosPorRVE);
+usuarios.get("/usuarios/tipo/user/:tipo", UsuariosController.UserType);
 
 module.exports = usuarios;
