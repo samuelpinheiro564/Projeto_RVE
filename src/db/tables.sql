@@ -25,10 +25,10 @@ CREATE TABLE Usuarios(
 
 
 
-CREATE TABLE rves(
+CREATE TABLE rves (
     Id INT PRIMARY KEY,
     NifAutor INT,
-    FOREIGN KEY (NifAutor) REFERENCES Usuarios(nif) ON DELETE CASCADE,
+    NifsUsuarios INT[],
     Estudante VARCHAR(255),
     Curso VARCHAR(255),
     Turma VARCHAR(255),
@@ -43,6 +43,7 @@ CREATE TABLE rves(
     Presenca TEXT,
     numberusers INT
 );
+
 
  CREATE TABLE rve_usuarios(
     id SERIAL PRIMARY KEY,

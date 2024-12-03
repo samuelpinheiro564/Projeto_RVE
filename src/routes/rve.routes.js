@@ -1,17 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const RveController = require("../Controller/Rve")
+const Rve = require('../Controller/Rve');
 
-router.get("/rve", RveController.GetAllRves);
-router.get("/rve/completa", RveController.rveCompleta);
-router.post("/rve", RveController.CreateRve);
-router.put("/campotexto", RveController.EditRve);
-router.delete("/rve/:id", RveController.deleteRve);
-router.get("/rve/:id", RveController.GetBYIDRVE);
-router.get("/rve/es/tu/dan/te/:estudante/:nifautor", RveController.rveEstudante);
-router.get("/rve/ultima/criada/:nifautor", RveController.rveUltimaCriada);
-router.get("/rve/t/u/r/ma/:turma/:nifautor", RveController.rveTurma);
-router.get("/rve/c/u/r/s/o/:curso/nifautor", RveController.rveCurso);
-
+router.get("/rve/todas/rves/participadas/como/usuario/:nifsusuarios", Rve.GetAllRves);
+router.get("/rve", Rve.getAllautor);
+router.get("/rve/completa/:nifsusuairos", Rve.rveCompleta);
+router.get("/rve/autor/:nifautor", Rve.rveCriadaautor);
+router.post("/rve", Rve.CreateRve);
+router.put("/rve/:id", Rve.EditRve);
+router.delete("/rve/:id", Rve.deleteRve);
+router.get("/rve/:id", Rve.GetBYIDRVE);
+router.get("/rve/estudante/:nome/:nifsusuarios", Rve.rveEstudante);
+router.get("/rve/ultima/criada/:nifsusuarios", Rve.rveUltimaCriada);
+router.get("/rve/turma/:turma/:nifsusuarios", Rve.rveTurma);
+router.get("/rve/curso/:curso/:nifsusuarios", Rve.rveCurso);
+router.get("/rve/sem/a/assinatura/:assinatura", Rve.rveSemAssinatura);
+router.put("/rve/assinar/sucesso/rve/:assinatura/:id", Rve.assinarRve);
 
 module.exports = router;
